@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>BK Convert – Images</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+:root{
+  --bg1:#1e3a8a;
+  --bg2:#020617;
+  --bgPurple:#2b164f;
+  --glass:rgba(15,23,42,.82);
+  --border:rgba(255,255,255,.14);
+  --text:#e5e7eb;
+  --muted:#9aa4c0;
+  --accent:#38bdf8;
+  --accent2:#818cf8;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  width:100vw;
+  height:100vh;
+  font-family:system-ui;
+  color:var(--text);
+  background:
+    radial-gradient(1200px at 0% 0%, var(--bg1), transparent),
+    radial-gradient(1000px at 100% 100%, var(--bgPurple), transparent),
+    linear-gradient(180deg,#050816,var(--bg2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+/* BOOT */
+#boot{
+  position:fixed;
+  inset:0;
+  background:#050816;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+}
+#boot .logo{
+  animation:pulse 1.4s infinite ease-in-out;
+}
+@keyframes pulse{
+  0%{opacity:.4;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.08)}
+  100%{opacity:.4;transform:scale(1)}
+}
+
+/* APP */
+.app{
+  width:920px;
+  max-width:94vw;
+  background:var(--glass);
+  backdrop-filter:blur(18px);
+  border:1px solid var(--border);
+  border-radius:28px;
+  padding:32px;
+  box-shadow:0 40px 120px rgba(0,0,0,.6);
+  animation:appIn .6s ease;
+}
+@keyframes appIn{
+  from{opacity:0;transform:scale(.96)}
+  to{opacity:1;transform:none}
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{
+  display:flex;
+  gap:12px;
+  font-size:26px;
+  font-weight:900;
+}
+.logo svg{width:34px;height:34px}
+
+/* IMAGES BADGE */
+.images-badge{
+  position:relative;
+  padding:6px 16px;
+  border-radius:12px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#020617;
+  font-weight:900;
+  overflow:hidden;
+  cursor:default;
+}
+
+/* LIGHTNING EFFECT */
+.images-badge::after{
+  content:"";
+  position:absolute;
+  top:-120%;
+  left:-40%;
+  width:40%;
+  height:300%;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.9),
+    transparent
+  );
+  transform:rotate(20deg);
+  opacity:0;
+}
+
+.images-badge:hover::after{
+  animation:flash .45s ease;
+}
+
+@keyframes flash{
+  0%{opacity:0;left:-40%}
+  30%{opacity:1}
+  100%{opacity:0;left:140%}
+}
+
+/* DROP */
+.drop{
+  margin-top:26px;
+  padding:64px;
+  border-radius:20px;
+  border:2px dashed var(--border);
+  text-align:center;
+  cursor:pointer;
+  transition:.25s;
+}
+.drop:hover{border-color:var(--accent)}
+
+/* THUMBNAILS */
+.thumbs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:22px 0;
+}
+.thumbs img{
+  width:90px;
+  height:90px;
+  object-fit:cover;
+  border-radius:12px;
+  border:1px solid var(--border);
+}
+
+/* CONTROLS */
+.controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+select{
+  padding:14px;
+  border-radius:14px;
+  background:#020617;
+  color:var(--text);
+  border:1px solid var(--border);
+}
+button{
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  cursor:pointer;
+  font-weight:900;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#020617;
+  transition:.25s;
+}
+button:hover{transform:translateY(-2px)}
+
+/* FOOTER */
+.footer{
+  position:fixed;
+  right:16px;
+  bottom:12px;
+  font-size:12px;
+  color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<!-- BOOT -->
+<div id="boot">
+  <div class="logo">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M4 8h11l-3-3" stroke="var(--accent)" stroke-width="2"/>
+      <path d="M20 16H9l3 3" stroke="var(--accent2)" stroke-width="2"/>
+    </svg>
+    BK Convert
+  </div>
+</div>
+
+<div class="app">
+
+<header>
+  <div class="logo">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M4 8h11l-3-3" stroke="var(--accent)" stroke-width="2"/>
+      <path d="M20 16H9l3 3" stroke="var(--accent2)" stroke-width="2"/>
+    </svg>
+    BK Convert
+  </div>
+  <div class="images-badge">IMAGES</div>
+</header>
+
+<div class="drop" id="imgDrop">
+  Klikni nebo přetáhni obrázky
+</div>
+<input type="file" id="imgInput" accept="image/*" multiple hidden>
+
+<div class="thumbs" id="thumbs"></div>
+
+<div class="controls">
+  <select id="format">
+    <option value="image/jpeg">JPG</option>
+    <option value="image/png">PNG</option>
+    <option value="image/webp">WEBP</option>
+  </select>
+  <button id="convert">Převést</button>
+</div>
+
+</div>
+
+<div class="footer">Powered by Nevermind web</div>
+
+<script>
+/* SAFE BOOT REMOVE */
+window.addEventListener("load",()=>{
+  requestAnimationFrame(()=>{
+    setTimeout(()=>{
+      const b=document.getElementById("boot");
+      if(b){
+        b.style.opacity=0;
+        setTimeout(()=>b.remove(),600);
+      }
+    },900);
+  });
+});
+
+/* PREVENT FILE OPEN */
+["dragenter","dragover","dragleave","drop"].forEach(e=>{
+  document.addEventListener(e,ev=>{
+    ev.preventDefault();ev.stopPropagation();
+  });
+});
+
+/* IMAGE INPUT */
+let files=[];
+imgDrop.onclick=()=>imgInput.click();
+
+imgInput.onchange=e=>{
+  files=[...e.target.files];
+  thumbs.innerHTML="";
+  files.forEach(f=>{
+    const img=document.createElement("img");
+    img.src=URL.createObjectURL(f);
+    thumbs.appendChild(img);
+  });
+};
+
+imgDrop.ondrop=e=>{
+  imgInput.files=e.dataTransfer.files;
+  imgInput.onchange({target:imgInput});
+};
+
+/* CONVERT */
+convert.onclick=()=>{
+  files.forEach(file=>{
+    const img=new Image();
+    img.src=URL.createObjectURL(file);
+    img.onload=()=>{
+      const c=document.createElement("canvas");
+      c.width=img.width;
+      c.height=img.height;
+      c.getContext("2d").drawImage(img,0,0);
+      const url=c.toDataURL(format.value,0.95);
+      const a=document.createElement("a");
+      a.href=url;
+      a.download=file.name.replace(/\..+$/,"")+"."+format.value.split("/")[1];
+      a.click();
+    };
+  });
+};
+</script>
+
+</body>
+</html>
