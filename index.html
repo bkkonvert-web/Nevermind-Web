@@ -486,7 +486,8 @@ const imgInput = document.getElementById("imgInput");
 const convertBtn = document.getElementById("convert");
 const status = document.getElementById("status");
 const app = document.getElementById("app");
-
+imgDrop.style.pointerEvents = "none";
+convertBtn.style.pointerEvents = "none";
 const formatButtons = document.querySelectorAll(".format-btn");
 
 let files = [];
@@ -538,9 +539,13 @@ function updateStoryScroll() {
   let appProgress = Math.max((progress - 0.84) / 0.14, 0);
   if (appProgress > 1) appProgress = 1;
 
-  app.style.opacity = appProgress;
+ app.style.opacity = appProgress;
   app.style.transform = `translateY(${120 - appProgress * 120}px) scale(${0.96 + appProgress * 0.04})`;
-  app.style.pointerEvents = appProgress > 0.98 ? "auto" : "none";
+  
+  const isInteractive = appProgress > 0.98;
+  app.style.pointerEvents = isInteractive ? "auto" : "none";
+  imgDrop.style.pointerEvents = isInteractive ? "auto" : "none";
+  convertBtn.style.pointerEvents = isInteractive ? "auto" : "none";
 }
 
 window.addEventListener("scroll", updateStoryScroll, { passive: true });
