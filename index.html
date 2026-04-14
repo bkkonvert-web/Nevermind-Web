@@ -200,7 +200,7 @@ body{
   transform:translateY(120px) scale(.96);
   transition:none;
   will-change:transform, opacity;
-  pointer-events:auto;
+  pointer-events:none;
 }
 
 .app::before{
@@ -540,6 +540,7 @@ function updateStoryScroll() {
 
   app.style.opacity = appProgress;
   app.style.transform = `translateY(${120 - appProgress * 120}px) scale(${0.96 + appProgress * 0.04})`;
+  app.style.pointerEvents = appProgress > 0.98 ? "auto" : "none";
 }
 
 window.addEventListener("scroll", updateStoryScroll, { passive: true });
