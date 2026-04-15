@@ -395,6 +395,17 @@ button:hover{
     border-radius:28px;
   }
 
+  .lock-icon{
+    width:46px;
+    height:46px;
+    overflow:visible;
+  }
+  
+  #lockShackleGroup{
+    transform-box:view-box;
+    transform-origin:12px 8px;
+  }
+  
   .intro h2{
     font-size:28px;
   }
@@ -435,7 +446,7 @@ button:hover{
     <div class="hero hero-second" id="heroSecond">
       <div class="hero-content">
         <h2>Bezpečnost na prvním místě</h2>
-        <p class="hero-note">Konverze probíhá přímo ve vašem prohlížeči.</p>
+        <p class="hero-note">Obrázky neopouštějí váš prohlížeč.</p>
       </div>
     </div>
 
@@ -450,11 +461,29 @@ button:hover{
             BK Convert
           </div>
           <div class="images-badge" aria-label="Bezpečné">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M7 10V8a5 5 0 0 1 10 0v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <rect x="5" y="10" width="14" height="10" rx="3" stroke="currentColor" stroke-width="2"/>
-          </svg>
-        </div>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="lock-icon">
+              <g id="lockShackleGroup">
+                <path
+                  d="M8 10V8.6a4 4 0 0 1 8 0V10"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <rect
+                x="5"
+                y="10"
+                width="14"
+                height="10"
+                rx="3"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+            </svg>
+          </div>
+
+          
         </header>
 
         <div class="drop" id="imgDrop">
@@ -501,6 +530,7 @@ const app = document.getElementById("app");
 imgDrop.style.pointerEvents = "none";
 convertBtn.style.pointerEvents = "none";
 const formatButtons = document.querySelectorAll(".format-btn");
+const lockShackleGroup = document.getElementById("lockShackleGroup");
 
 let files = [];
 let selectedFormatValue = "";
@@ -549,8 +579,14 @@ function updateStoryScroll() {
   heroSecond.style.transform = `translateY(${secondY}px) scale(${secondScale})`;
 
   let appProgress = Math.max((progress - 0.84) / 0.14, 0);
-  if (appProgress > 1) appProgress = 1;
-
+  if(appProgress > 1) appProgress = 1;
+  
+  const lockProgress = Math.min(Math.max(appProgress, 0), 1);
+  const lockRotation = -42 + (42 * lockProgress);
+  const lockShiftX = -2.2 + (2.2 * lockProgress);
+  
+  lockShackleGroup.style.transform =
+    `translateX(${lockShiftX}px) rotate(${lockRotation}deg)`;
  app.style.opacity = appProgress;
   app.style.transform = `translateY(${120 - appProgress * 120}px) scale(${0.96 + appProgress * 0.04})`;
   
