@@ -79,46 +79,6 @@ body{
 }
 
 /* ===== SECTIONS ===== */
-.section{
-  width:100%;
-}
-
-.story{
-  position:relative;
-  height:260vh;
-}
-
-.story-sticky{
-  position:sticky;
-  top:0;
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:40px 20px;
-  overflow:visible;
-}
-
-.hero{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  transition:opacity .15s linear, transform .15s linear;
-  will-change:transform, opacity;
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:-180px -220px;
-  background:
-    radial-gradient(1000px at 50% 55%, rgba(91, 40, 172, 0.700), transparent 60%);
-  z-index:-1;
-  pointer-events:none;
-}
 .hero-content{
   width:920px;
   max-width:94vw;
@@ -131,8 +91,15 @@ body{
   letter-spacing:-0.03em;
 }
 
+.blue-section h2{
+  margin:0 0 22px;
+  font-size:clamp(36px, 5.4vw, 64px);
+  line-height:1.08;
+  letter-spacing:-0.03em;
+}
+
 .hero-content p{
-  margin:0 auto 14px;
+  margin:0 auto 18px;
   max-width:760px;
   font-size:clamp(18px, 1.9vw, 20px);
   line-height:1.7;
@@ -140,33 +107,11 @@ body{
 }
 
 .hero-note{
+  margin-top:8px;
   font-size:clamp(18px, 1.9vw, 20px) !important;
   line-height:1.7;
   color:var(--muted) !important;
   opacity:1;
-}
-
-.hero-second{
-  opacity:0;
-  transform:translateY(40px) scale(.98);
-  pointer-events:none;
-}
-
-.hero-second::before{
-  content:"";
-  position:absolute;
-  inset:-180px -220px;
-  background:
-    radial-gradient(1000px at 50% 55%, rgba(41, 150, 223, 0.700), transparent 60%);
-  z-index:-1;
-  pointer-events:none;
-}
-
-.hero-second h2{
-  margin:0 0 22px;
-  font-size:clamp(32px, 5.4vw, 64px);
-  line-height:1.1;
-  letter-spacing:-0.03em;
 }
 
 .scroll-btn{
@@ -185,6 +130,71 @@ body{
   transform:translateY(-3px) scale(1.02);
 }
 
+.top-section{
+  min-height:88vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:28px 20px;
+}
+
+.info-section{
+  min-height:52vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:12px 20px;
+  position:relative;
+  opacity:0;
+  transform:translateY(30px) scale(.99);
+  transition:opacity .7s ease, transform .7s ease;
+  will-change:opacity, transform;
+}
+
+.static-convert{
+  position:relative;
+  inset:auto;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:visible;
+  pointer-events:auto;
+}
+
+.app-visible{
+  opacity:1 !important;
+  transform:none !important;
+  pointer-events:auto !important;
+}
+
+.info-section.visible{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+.purple-section::before{
+  content:"";
+  position:absolute;
+  inset:-320px -320px;
+  background:
+    radial-gradient(1200px at 50% 38%, rgba(91, 40, 172, 0.62), transparent 68%);
+  filter:blur(90px);
+  z-index:-1;
+  pointer-events:none;
+}
+
+.blue-section::before{
+  content:"";
+  position:absolute;
+  inset:-320px -320px;
+  background:
+    radial-gradient(1200px at 50% 62%, rgba(41, 150, 223, 0.62), transparent 68%);
+  filter:blur(90px);
+  z-index:-1;
+  pointer-events:none;
+}
+
 .scroll-hint{
   margin-top:18px;
   color:var(--muted);
@@ -193,15 +203,6 @@ body{
 }
 
 /* ===== CONVERT SECTION ===== */
-.convert-wrap{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  pointer-events:none;
-  overflow:visible;
-}
 
 .app{
   position:relative;
@@ -223,11 +224,12 @@ body{
 .app::before{
   content:"";
   position:absolute;
-    inset:-350px -220px;
+  inset:-520px -320px;
   background:
-    radial-gradient(900px at 45% 60%, rgba(91, 40, 172, 0.600), transparent 50%),
-    radial-gradient(800px at 65% 50%, rgba(41, 150, 223, 0.500), transparent 50%);
-    z-index:-1;
+    radial-gradient(950px at 45% 60%, rgba(91, 40, 172, 0.48), transparent 62%),
+    radial-gradient(850px at 65% 50%, rgba(41, 150, 223, 0.42), transparent 62%);
+  filter:blur(70px);
+  z-index:-1;
   pointer-events:none;
 }
 
@@ -454,84 +456,93 @@ button:hover{
 
 
 <!-- HERO -->
-<section class="section story" id="story">
-  <div class="story-sticky">
-
-    <div class="hero" id="hero">
-      <div class="hero-content">
-        <h1>Převod obrázků jednoduše a zdarma s BK Convert</h1>
-        <p>
-          Nejrychlejší převod obrázků JPG, PNG i WEBP - vložte obrázky, zvolte cílový formát a stáhněte ihned vše v jednom ZIP souboru.
-        </p>
-        
-      </div>
-    </div>
-    <div class="hero hero-second" id="heroSecond">
-      <div class="hero-content">
-        <h2>Bezpečnost na prvním místě</h2>
-        <p class="hero-note">Obrázky neopouštějí váš prohlížeč.</p>
-      </div>
-    </div>
-
-    <div class="convert-wrap">
-      <div class="app" id="app">
-        <header>
-          <div class="logo">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M4 8h11l-3-3" stroke="var(--accent)" stroke-width="2"/>
-              <path d="M20 16H9l3 3" stroke="var(--accent2)" stroke-width="2"/>
-            </svg>
-            BK Convert
-          </div>
-          <div class="images-badge" aria-label="Bezpečné">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="lock-icon">
-              <g id="lockShackleGroup">
-                <path
-                  d="M8 10V8.6a4 4 0 0 1 8 0V10"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </g>
-              <rect
-                x="5"
-                y="10"
-                width="14"
-                height="10"
-                rx="3"
+<section class="top-section">
+  <div class="convert-wrap static-convert">
+    <div class="app app-visible" id="app">
+      <header>
+        <div class="logo">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 8h11l-3-3" stroke="var(--accent)" stroke-width="2"/>
+            <path d="M20 16H9l3 3" stroke="var(--accent2)" stroke-width="2"/>
+          </svg>
+          BK Convert
+        </div>
+        <div class="images-badge" aria-label="Bezpečné">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="lock-icon">
+            <g id="lockShackleGroup">
+              <path
+                d="M8 10V8.6a4 4 0 0 1 8 0V10"
                 stroke="currentColor"
                 stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
-            </svg>
-          </div>
-
-          
-        </header>
-
-        <div class="drop" id="imgDrop">
-          Klikněte nebo přetáhněte obrázky
+            </g>
+            <rect
+              x="5"
+              y="10"
+              width="14"
+              height="10"
+              rx="3"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+          </svg>
         </div>
-        <input type="file" id="imgInput" accept="image/*" multiple hidden>
+      </header>
 
+      <div class="drop" id="imgDrop">
+        Klikněte nebo přetáhněte obrázky
+      </div>
+      <input type="file" id="imgInput" accept="image/*" multiple hidden>
 
-        <div class="controls">
-          <div class="format-buttons" id="formatButtons">
-            <button type="button" class="format-btn" data-value="image/jpeg">JPG</button>
-            <button type="button" class="format-btn" data-value="image/png">PNG</button>
-            <button type="button" class="format-btn" data-value="image/webp">WEBP</button>
-          </div>
-          <button id="convert">Konvertovat a stáhnout ZIP</button>
+      <div class="controls">
+        <div class="format-buttons" id="formatButtons">
+          <button type="button" class="format-btn" data-value="image/jpeg">JPG</button>
+          <button type="button" class="format-btn" data-value="image/png">PNG</button>
+          <button type="button" class="format-btn" data-value="image/webp">WEBP</button>
         </div>
+        <button id="convert">Konvertovat a stáhnout ZIP</button>
+      </div>
 
-        <div class="status" id="status"></div>
-        <div class="app-contact">
-          <a href="mailto:bkkonverthelp@gmail.com">Kontakt: bkkonverthelp@gmail.com</a>
+      <div class="status" id="status"></div>
+      <div class="app-contact">
+        <a href="mailto:bkkonverthelp@gmail.com">Kontakt: bkkonverthelp@gmail.com</a>
       </div>
     </div>
-
   </div>
 </section>
+
+<section class="info-section purple-section">
+  <div class="hero-content">
+    <h1>Převod obrázků jednoduše a zdarma s BK Convert</h1>
+    <p>
+      Převádějte obrázky mezi formáty JPG, PNG a WEBP rychle a bez zbytečných kroků.
+    </p>
+    <p>
+      Stačí vložit soubory, vybrat cílový formát a stáhnout hotový ZIP soubor během chvíle.
+    </p>
+    <p class="hero-note">
+      Jednoduché rozhraní. Rychlý výsledek. Více obrázků najednou.
+    </p>
+  </div>
+</section>
+
+<section class="info-section blue-section">
+  <div class="hero-content">
+    <h2>Bezpečnost na prvním místě</h2>
+    <p>
+      BK Convert zpracovává obrázky přímo ve vašem prohlížeči. To znamená, že soubory nejsou odesílány na externí server a celý proces probíhá lokálně na vašem zařízení.
+    </p>
+    <p>
+      Díky tomu máte větší kontrolu nad svými daty a můžete převádět obrázky rychle, bez registrace, bez čekání a bez zbytečného sdílení souborů třetím stranám.
+    </p>
+    <p class="hero-note">
+      Jednoduchý nástroj, rychlý výsledek a bezpečnější práce s obrázky každý den.
+    </p>
+  </div>
+</section>
+
 
 
 <script>
@@ -552,10 +563,9 @@ const imgInput = document.getElementById("imgInput");
 const convertBtn = document.getElementById("convert");
 const status = document.getElementById("status");
 const app = document.getElementById("app");
-imgDrop.style.pointerEvents = "none";
-convertBtn.style.pointerEvents = "none";
 const formatButtons = document.querySelectorAll(".format-btn");
 const lockShackleGroup = document.getElementById("lockShackleGroup");
+lockShackleGroup.style.transform = "translateX(0px) rotate(0deg)";
 
 let files = [];
 let selectedFormatValue = "";
@@ -568,62 +578,6 @@ formatButtons.forEach(button => {
   });
 });
 
-
-/* REVEAL APP ON SCROLL */
-const hero = document.getElementById("hero");
-const heroSecond = document.getElementById("heroSecond");
-const story = document.getElementById("story");
-
-function updateStoryScroll() {
-  const rect = story.getBoundingClientRect();
-  const maxScroll = story.offsetHeight - window.innerHeight;
-
-  let progress = 0;
-  if (maxScroll > 0) {
-    progress = Math.min(Math.max(-rect.top / maxScroll, 0), 1);
-  }
-
-  const heroOpacity = 1 - Math.min(progress * 2.2, 1);
-  const heroY = progress * -80;
-  const heroScale = 1 - progress * 0.08;
-
-  hero.style.opacity = heroOpacity;
-  hero.style.transform = `translateY(${heroY}px) scale(${heroScale})`;
-
-  let secondProgress = Math.max((progress - 0.30) / 0.25, 0);
-  if (secondProgress > 1) secondProgress = 1;
-
-  let secondFadeOut = Math.max((progress - 0.84) / 0.10, 0);
-  if (secondFadeOut > 1) secondFadeOut = 1;
-
-  const secondOpacity = secondProgress * (1 - secondFadeOut);
-  const secondY = 40 - secondProgress * 40 - secondFadeOut * 16;
-  const secondScale = 0.98 + secondProgress * 0.02;
-
-  heroSecond.style.opacity = secondOpacity;
-  heroSecond.style.transform = `translateY(${secondY}px) scale(${secondScale})`;
-
-  let appProgress = Math.max((progress - 0.84) / 0.14, 0);
-  if(appProgress > 1) appProgress = 1;
-  
-  const lockProgress = Math.min(Math.max(appProgress, 0), 1);
-  const lockRotation = -42 + (42 * lockProgress);
-  const lockShiftX = -2.2 + (2.2 * lockProgress);
-  
-  lockShackleGroup.style.transform =
-    `translateX(${lockShiftX}px) rotate(${lockRotation}deg)`;
- app.style.opacity = appProgress;
-  app.style.transform = `translateY(${120 - appProgress * 120}px) scale(${0.96 + appProgress * 0.04})`;
-  
-  const isInteractive = appProgress > 0.98;
-  app.style.pointerEvents = isInteractive ? "auto" : "none";
-  imgDrop.style.pointerEvents = isInteractive ? "auto" : "none";
-  convertBtn.style.pointerEvents = isInteractive ? "auto" : "none";
-}
-
-window.addEventListener("scroll", updateStoryScroll, { passive: true });
-window.addEventListener("resize", updateStoryScroll);
-updateStoryScroll();
 
 /* PREVENT FILE OPEN */
 ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
@@ -754,6 +708,25 @@ convertBtn.onclick = async () => {
     convertBtn.textContent = "Převést a stáhnout ZIP";
   }
 };
+
+const infoSections = document.querySelectorAll(".info-section");
+
+const infoObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    } else {
+      entry.target.classList.remove("visible");
+    }
+  });
+}, {
+  threshold: 0.28
+});
+
+infoSections.forEach(section => {
+  infoObserver.observe(section);
+});
+
 </script>
 
 </body>
