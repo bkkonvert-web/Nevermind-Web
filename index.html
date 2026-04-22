@@ -494,7 +494,7 @@ button:hover{
     font-size:12px;
   }
 }
-     
+
 </style>
 
 </head>
@@ -549,7 +549,7 @@ button:hover{
           <button type="button" class="format-btn" data-value="image/png">PNG</button>
           <button type="button" class="format-btn" data-value="image/webp">WEBP</button>
         </div>
-        <button id="convert">Konvertovat a stáhnout ZIP</button>
+        <button id="convert">Konvertovat a stáhnout</button>
       </div>
 
       <div class="status" id="status"></div>
@@ -625,6 +625,9 @@ formatButtons.forEach(button => {
   });
 });
 
+function isMobileDevice() {
+  return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
 
 /* PREVENT FILE OPEN */
 ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
@@ -702,6 +705,7 @@ async function convertImageFile(file, mimeType) {
     img.src = objectUrl;
   });
 }
+
 convertBtn.onclick = async () => {
   if (files.length === 0) {
     status.textContent = "Nejdřív vyber alespoň jeden obrázek.";
@@ -712,21 +716,33 @@ convertBtn.onclick = async () => {
     status.textContent = "Nejdřív vyber výstupní formát.";
     return;
   }
+
   status.textContent = `Převod probíhá... 0 z ${files.length}`;
   convertBtn.disabled = true;
   convertBtn.textContent = "Probíhá převod...";
 
   try {
+    const extension = selectedFormatValue.split("/")[1] === "jpeg"
+      ? "jpg"
+      : selectedFormatValue.split("/")[1];
+
+    const mobile = isMobileDevice();
+
+    if (mobile && files.length === 1) {
+      const file = files[0];
+      const convertedBlob = await convertImageFile(file, selectedFormatValue);
+      const outputName = file.name.replace(/\.[^.]+$/, "") + "." + extension;
+
+      downloadBlob(convertedBlob, outputName);
+      status.textContent = "Hotovo. Obrázek byl stažen.";
+      return;
+    }
+
     const zip = new JSZip();
     let done = 0;
 
     for (const file of files) {
       const convertedBlob = await convertImageFile(file, selectedFormatValue);
-
-      const extension = selectedFormatValue.split("/")[1] === "jpeg"
-        ? "jpg"
-        : selectedFormatValue.split("/")[1];
-
       const outputName = file.name.replace(/\.[^.]+$/, "") + "." + extension;
       zip.file(outputName, convertedBlob);
 
@@ -737,14 +753,7 @@ convertBtn.onclick = async () => {
     status.textContent = "Balení ZIP souboru...";
 
     const zipBlob = await zip.generateAsync({ type: "blob" });
-    const zipUrl = URL.createObjectURL(zipBlob);
-
-    const a = document.createElement("a");
-    a.href = zipUrl;
-    a.download = "bkconvert-images.zip";
-    a.click();
-
-    URL.revokeObjectURL(zipUrl);
+    downloadBlob(zipBlob, "bkconvert-images.zip");
 
     status.textContent = `Hotovo. ZIP obsahuje ${files.length} obrázků.`;
   } catch (error) {
@@ -752,9 +761,18 @@ convertBtn.onclick = async () => {
     status.textContent = "Při převodu došlo k chybě.";
   } finally {
     convertBtn.disabled = false;
-    convertBtn.textContent = "Převést a stáhnout ZIP";
+    convertBtn.textContent = "Konvertovat a stáhnout";
   }
 };
+
+function downloadBlob(blob, fileName) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = fileName;
+  a.click();
+  URL.revokeObjectURL(url);
+}
 
 const infoSections = document.querySelectorAll(".info-section");
 
