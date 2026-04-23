@@ -685,10 +685,7 @@ button:hover{
   }
 
   body{
-    background:
-      radial-gradient(circle at 30% 18%, rgba(123, 63, 255, 0.12) 0%, rgba(123, 63, 255, 0) 32%),
-      radial-gradient(circle at 72% 78%, rgba(58, 156, 255, 0.10) 0%, rgba(58, 156, 255, 0) 28%),
-      linear-gradient(180deg, #040816 0%, #081327 100%);
+    background:linear-gradient(180deg, #040816 0%, #081327 100%);
     background-attachment:scroll;
   }
 
@@ -699,9 +696,12 @@ button:hover{
 
   .info-section{
     min-height:auto;
-    padding:28px 16px;
+    padding:24px 16px;
   }
 
+  /* vypnout všechny glow / blur vrstvy */
+  .info-section::before,
+  .guide-section::before,
   .purple-section::before,
   .blue-section::before,
   .app::before,
@@ -714,37 +714,41 @@ button:hover{
   }
 
   .hero-content h1,
-  .blue-section h2{
-    font-size:clamp(34px, 9vw, 46px);
-    line-height:1.06;
-    margin:0 0 16px;
+  .blue-section h2,
+  .guide-head h2{
+    font-size:clamp(32px, 8.6vw, 42px);
+    line-height:1.08;
+    margin:0 0 14px;
     letter-spacing:-0.03em;
   }
 
   .hero-content p,
-  .hero-note{
-    font-size:17px !important;
-    line-height:1.65;
+  .hero-note,
+  .guide-head p{
+    font-size:16px !important;
+    line-height:1.6;
     max-width:100%;
-    margin:0 auto 16px;
+    margin:0 auto 14px;
   }
 
+  /* hlavní karta bez glass efektu */
   .app{
     width:100%;
     max-width:100%;
     padding:18px;
-    border-radius:24px;
-    background:rgba(14,22,42,.88);
+    border-radius:22px;
+    background:#10192d;
     border:1px solid rgba(255,255,255,.08);
-    box-shadow:0 18px 40px rgba(0,0,0,.28);
-    backdrop-filter:blur(10px);
+    box-shadow:none;
+    backdrop-filter:none;
   }
 
   header{
-    display:grid;
-    grid-template-columns:1fr auto;
+    display:flex;
+    justify-content:flex-start;
     align-items:center;
     gap:12px;
+    flex-wrap:wrap;
   }
 
   .logo{
@@ -757,16 +761,9 @@ button:hover{
     height:28px;
   }
 
-  .images-badge{
-    width:64px;
-    height:44px;
-    border-radius:16px;
-    justify-self:end;
-  }
-
   .drop{
     margin-top:16px;
-    padding:30px 14px;
+    padding:28px 14px;
     border-radius:20px;
     font-size:16px;
     line-height:1.35;
@@ -809,6 +806,106 @@ button:hover{
     margin-top:14px;
     text-align:center;
     font-size:12px;
+  }
+
+  /* guide scroll úplně jednoduše */
+  .guide-wrap{
+    max-width:100%;
+  }
+
+  .guide-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:16px;
+    align-items:stretch;
+  }
+
+  .guide-card{
+    order:1;
+    padding:18px;
+    border-radius:22px;
+    background:#10192d;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:none;
+    backdrop-filter:none;
+  }
+
+  .guide-left{
+    order:2;
+  }
+
+  .guide-right{
+    order:3;
+  }
+
+  .guide-left .guide-note:first-child,
+  .guide-right .guide-note{
+    margin-top:0;
+    margin-left:0;
+  }
+
+  .guide-side{
+    gap:12px;
+  }
+
+  .guide-note{
+    padding:16px;
+    border-radius:18px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    text-align:left;
+  }
+
+  .guide-left .guide-note::before,
+  .guide-left .guide-note::after,
+  .guide-right .guide-note::before,
+  .guide-right .guide-note::after{
+    display:none !important;
+  }
+
+  .guide-card-header{
+    justify-content:flex-start;
+    gap:12px;
+  }
+
+  .guide-logo{
+    font-size:20px;
+  }
+
+  .guide-logo svg{
+    width:28px;
+    height:28px;
+  }
+
+  .guide-drop{
+    margin-top:16px;
+    padding:28px 14px;
+    border-radius:20px;
+    font-size:16px;
+    line-height:1.35;
+  }
+
+  .guide-controls{
+    grid-template-columns:1fr;
+    gap:12px;
+    margin-top:16px;
+  }
+
+  .guide-format-buttons{
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:8px;
+  }
+
+  .guide-format-btn{
+    height:56px;
+    border-radius:18px;
+    font-size:16px;
+  }
+
+  .guide-main-btn{
+    height:60px;
+    border-radius:20px;
+    font-size:17px;
   }
 }
 
