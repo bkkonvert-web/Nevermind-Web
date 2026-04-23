@@ -188,12 +188,12 @@ body{
 
 .purple-section::before{
   background:
-    radial-gradient(1100px at 50% 42%, rgba(91, 40, 172, 0.58), transparent 68%);
+    radial-gradient(1100px at 50% 58%, rgba(91, 40, 172, 0.58), transparent 68%);
 }
 
 .blue-section::before{
   background:
-    radial-gradient(1100px at 50% 58%, rgba(41, 150, 223, 0.822), transparent 70%);
+    radial-gradient(1100px at 50% 58%, rgba(41, 150, 223, 0.58), transparent 68%);
 }
 
 .blue-section{
@@ -260,9 +260,9 @@ body{
 /* ===== BK LOGO ===== */
 header{
   display:flex;
-  justify-content:space-between;
+  justify-content:flex-start;
   align-items:center;
-  gap:42px;
+  gap:16px;
   flex-wrap:wrap;
 }
 
@@ -278,21 +278,6 @@ header{
   height:34px;
 }
 
-.images-badge{
-  width:76px;
-  height:52px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:20px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  color:#020617
-}
-
-.images-badge svg{
-  width:46px;
-  height:46px;
-}
 
 .intro{
   margin-top:24px;
@@ -411,6 +396,288 @@ button:hover{
   color:var(--muted);
 }
 
+/* ===== 4TH SCROLL / HOW IT WORKS ===== */
+.guide-section{
+  position:relative;
+  background:transparent;
+}
+
+.guide-section::before{
+  background:
+    radial-gradient(900px at 30% 50%, rgba(91, 40, 172, 0.18), transparent 68%),
+    radial-gradient(900px at 70% 50%, rgba(41, 150, 223, 0.18), transparent 68%);
+}
+
+.guide-wrap{
+  width:1280px;
+  max-width:95vw;
+}
+
+.guide-head{
+  text-align:center;
+  margin-bottom:28px;
+}
+
+.guide-head h2{
+  margin:0 0 16px;
+  font-size:clamp(36px, 5.2vw, 62px);
+  line-height:1.08;
+  letter-spacing:-0.03em;
+}
+
+.guide-head p{
+  margin:0 auto;
+  max-width:760px;
+  font-size:clamp(18px, 1.9vw, 20px);
+  line-height:1.7;
+  color:var(--muted);
+}
+
+.guide-grid{
+  display:grid;
+  grid-template-columns:280px minmax(0, 1fr) 220px;
+  gap:28px;
+  align-items:center;
+}
+
+
+
+.guide-side{
+  display:grid;
+  gap:18px;
+}
+
+.guide-note{
+  position:relative;
+  z-index:3;
+  padding:18px 18px 18px 18px;
+  border-radius:22px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08);
+  text-align:left;
+}
+
+.guide-note .step{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:30px;
+  height:30px;
+  margin-bottom:10px;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#020617;
+  font-weight:900;
+  font-size:14px;
+}
+
+.guide-note h3{
+  margin:0 0 8px;
+  font-size:18px;
+  line-height:1.2;
+}
+
+.guide-note p{
+  margin:0;
+  font-size:14px;
+  line-height:1.55;
+  color:var(--muted);
+}
+
+/* arrows toward center */
+.guide-left .guide-note::after,
+.guide-right .guide-note::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:30px;
+  height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  opacity:.85;
+}
+
+.guide-left .guide-note::before,
+.guide-right .guide-note::before{
+  content:"";
+  position:absolute;
+  top:calc(50% - 4px);
+  width:8px;
+  height:8px;
+  border-top:2px solid var(--accent2);
+  border-right:2px solid var(--accent2);
+  opacity:.9;
+}
+
+.guide-left .guide-note::after{
+  right:-30px;
+}
+
+.guide-left .guide-note::before{
+  right:-30px;
+  transform:rotate(45deg);
+}
+
+.guide-right .guide-note::after{
+  left:-30px;
+}
+
+.guide-right .guide-note::before{
+  left:-30px;
+  transform:rotate(-135deg);
+}
+
+.guide-left .guide-note::before,
+.guide-left .guide-note::after,
+.guide-right .guide-note::before,
+.guide-right .guide-note::after{
+  z-index:4;
+}
+
+.guide-card{
+  z-index:1;
+}
+
+.guide-card{
+  position:relative;
+  width:100%;
+  background:var(--glass);
+  backdrop-filter:blur(18px);
+  border:1px solid var(--border);
+  border-radius:36px;
+  padding:32px;
+  box-shadow:0 40px 120px rgba(0,0,0,.45);
+  pointer-events:none;
+}
+
+.guide-card-header{
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  gap:16px;
+}
+
+.guide-logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:22px;
+  font-weight:900;
+  color:#fff;
+}
+
+.guide-logo svg{
+  width:34px;
+  height:34px;
+}
+
+.guide-drop{
+  margin-top:24px;
+  padding:52px 20px;
+  border-radius:28px;
+  border:2px dashed rgba(56,189,248,.55);
+  text-align:center;
+  font-size:20px;
+  font-weight:800;
+  color:#fff;
+}
+
+.guide-controls{
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:18px;
+  margin-top:22px;
+}
+
+.guide-format-buttons{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:12px;
+}
+
+.guide-format-btn{
+  height:70px;
+  border-radius:24px;
+  border:1px solid rgba(255,255,255,.22);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:19px;
+  font-weight:800;
+  color:#fff;
+}
+
+.guide-format-btn.active{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#020617;
+  border-color:transparent;
+}
+
+.guide-main-btn{
+  height:70px;
+  border-radius:24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  font-weight:900;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#020617;
+}
+
+.guide-left .guide-note:first-child{
+  margin-top:80px;
+}
+
+.guide-right .guide-note{
+  margin-top:220px;
+}
+
+/* mobile + smaller desktop */
+@media (max-width: 980px){
+  .guide-grid{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  .guide-card{
+    order:1;
+  }
+
+  .guide-left{
+    order:2;
+  }
+
+  .guide-right{
+    order:3;
+    align-content:center;
+  }
+
+  .guide-left .guide-note::before,
+  .guide-left .guide-note::after,
+  .guide-right .guide-note::before,
+  .guide-right .guide-note::after{
+    display:none;
+  }
+
+  .guide-side{
+    gap:12px;
+  }
+
+  .guide-note{
+    text-align:left;
+  }
+
+  .guide-left .guide-note:first-child{
+    margin-top:0;
+  }
+
+  .guide-right .guide-note{
+    margin-top:0;
+  }
+}
+
+
+
 /* ===== MOBILE ===== */
 @media (max-width: 768px){
   html, body{
@@ -497,17 +764,6 @@ button:hover{
     justify-self:end;
   }
 
-  .lock-icon{
-    width:34px;
-    height:34px;
-    overflow:visible;
-  }
-
-  #lockShackleGroup{
-    transform-box:view-box;
-    transform-origin:12px 8px;
-  }
-
   .drop{
     margin-top:16px;
     padding:30px 14px;
@@ -556,6 +812,8 @@ button:hover{
   }
 }
 
+
+
 </style>
 
 </head>
@@ -574,28 +832,6 @@ button:hover{
             <path d="M20 16H9l3 3" stroke="var(--accent2)" stroke-width="2"/>
           </svg>
           BK Convert
-        </div>
-        <div class="images-badge" aria-label="Bezpečné">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="lock-icon">
-            <g id="lockShackleGroup">
-              <path
-                d="M8 10V8.6a4 4 0 0 1 8 0V10"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </g>
-            <rect
-              x="5"
-              y="10"
-              width="14"
-              height="10"
-              rx="3"
-              stroke="currentColor"
-              stroke-width="2"
-            />
-          </svg>
         </div>
       </header>
 
@@ -651,7 +887,74 @@ button:hover{
   </div>
 </section>
 
+<section class="info-section guide-section">
+  <div class="guide-wrap">
+    <div class="guide-head">
+      <h2>Jak použít BK Convert</h2>
+      <p>
+        Krátký návod, jak převést obrázky během několika sekund.
+      </p>
+    </div>
 
+    <div class="guide-grid">
+      <div class="guide-side guide-left">
+        <div class="guide-note">
+          <div class="step">1</div>
+          <h3>Vložte obrázky</h3>
+          <p>
+            Klikněte do pole nebo do něj přetáhněte soubory, které chcete převést.
+          </p>
+        </div>
+
+        <div class="guide-note">
+          <div class="step">2</div>
+          <h3>Vyberte formát</h3>
+          <p>
+            Zvolte cílový formát JPG, PNG nebo WEBP podle toho, co potřebujete.
+          </p>
+        </div>
+      </div>
+
+      <div class="guide-card">
+        <div class="guide-card-header">
+          <div class="guide-logo">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 8h11l-3-3" stroke="var(--accent)" stroke-width="2"/>
+              <path d="M20 16H9l3 3" stroke="var(--accent2)" stroke-width="2"/>
+            </svg>
+            BK Convert
+          </div>
+        </div>
+
+        <div class="guide-drop">
+          Klikněte nebo přetáhněte obrázky
+        </div>
+
+        <div class="guide-controls">
+          <div class="guide-format-buttons">
+            <div class="guide-format-btn">JPG</div>
+            <div class="guide-format-btn">PNG</div>
+            <div class="guide-format-btn active">WEBP</div>
+          </div>
+
+          <div class="guide-main-btn">
+            Konvertovat a stáhnout
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-side guide-right">
+        <div class="guide-note">
+          <div class="step">3</div>
+          <h3>Stáhněte výsledek</h3>
+          <p>
+            Po dokončení se hotový výstup stáhne automaticky.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <script>
 /* BOOT */
@@ -672,8 +975,6 @@ const convertBtn = document.getElementById("convert");
 const status = document.getElementById("status");
 const app = document.getElementById("app");
 const formatButtons = document.querySelectorAll(".format-btn");
-const lockShackleGroup = document.getElementById("lockShackleGroup");
-lockShackleGroup.style.transform = "translateX(0px) rotate(0deg)";
 
 let files = [];
 let selectedFormatValue = "";
