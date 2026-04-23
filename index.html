@@ -139,13 +139,15 @@ body{
 }
 
 .info-section{
-  min-height:52vh;
+  min-height:80vh;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:12px 20px;
+  padding:24px 24px;
   position:relative;
+  isolation:isolate;
+  z-index:0;
   opacity:0;
   transform:translateY(30px) scale(.99);
   transition:opacity .7s ease, transform .7s ease;
@@ -169,31 +171,36 @@ body{
   pointer-events:auto !important;
 }
 
+
 .info-section.visible{
   opacity:1;
   transform:translateY(0) scale(1);
 }
-.purple-section::before{
+
+.info-section::before{
   content:"";
   position:absolute;
-  inset:-320px -320px;
-  background:
-    radial-gradient(1200px at 50% 38%, rgba(91, 40, 172, 0.62), transparent 68%);
-  filter:blur(90px);
+  inset:-120px -120px;
+  filter:blur(100px);
   z-index:-1;
   pointer-events:none;
 }
 
-.blue-section::before{
-  content:"";
-  position:absolute;
-  inset:-320px -320px;
+.purple-section::before{
   background:
-    radial-gradient(1200px at 50% 62%, rgba(41, 150, 223, 0.62), transparent 68%);
-  filter:blur(90px);
-  z-index:-1;
-  pointer-events:none;
+    radial-gradient(1100px at 50% 42%, rgba(91, 40, 172, 0.58), transparent 68%);
 }
+
+.blue-section::before{
+  background:
+    radial-gradient(1100px at 50% 58%, rgba(41, 150, 223, 0.822), transparent 70%);
+}
+
+.blue-section{
+  position:relative;
+  background:transparent;
+}
+
 
 .scroll-hint{
   margin-top:18px;
@@ -614,7 +621,7 @@ button:hover{
   </div>
 </section>
 
-<section class="info-section purple-section">
+<section class="info-section purple-section">  
   <div class="hero-content">
     <h1>Převod obrázků jednoduše a zdarma s BK Convert</h1>
     <p>
