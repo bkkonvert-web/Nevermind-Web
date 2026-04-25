@@ -760,28 +760,28 @@ button:hover{
   height:52px;
   padding:0;
   border-radius:16px;
-  border:1px solid rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.18);
   background:rgba(255,255,255,.055);
-  color:#ffffff;
+  color:#e5e7eb;
   display:flex;
   align-items:center;
   justify-content:center;
   cursor:pointer;
-  transition:transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+  transition:background .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
 
 .share-btn:hover{
-  transform:translateY(-2px) scale(1.03);
+  transform:none;
   background:rgba(255,255,255,.09);
   border-color:rgba(255,255,255,.28);
-  box-shadow:0 14px 34px rgba(56,189,248,.16);
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
 }
 
 .share-icon{
   width:25px;
   height:25px;
   fill:none;
-  stroke:#ffffff;
+  stroke:currentColor;
   stroke-width:2.15;
   stroke-linecap:round;
   stroke-linejoin:round;
@@ -882,10 +882,10 @@ button:hover{
   }
 
   .share-row{
-  position:absolute;
-  top:12px;
-  right:16px;
-  margin:0;
+    position:absolute;
+    top:12px;
+    right:16px;
+    margin:0;
   }
 
   .share-btn{
@@ -935,96 +935,96 @@ button:hover{
     display:none;
   }
 
-/* mobil: scroll 4 jen jako 3 jednoduché kroky */
-.guide-section{
-  min-height:auto;
-  padding-top:20px;
-  padding-bottom:20px;
-}
+  /* mobil: scroll 4 jen jako 3 jednoduché kroky */
+  .guide-section{
+    min-height:auto;
+    padding-top:20px;
+    padding-bottom:20px;
+  }
 
-.guide-head,
-.guide-card{
-  display:none !important;
-}
+  .guide-head,
+  .guide-card{
+    display:none !important;
+  }
 
-.guide-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:12px;
-}
+  .guide-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+  }
 
-.guide-left{
-  order:1;
-  display:grid;
-  gap:12px;
-}
+  .guide-left{
+    order:1;
+    display:grid;
+    gap:12px;
+  }
 
-.guide-right{
-  order:2;
-  display:grid;
-  gap:12px;
-}
+  .guide-right{
+    order:2;
+    display:grid;
+    gap:12px;
+  }
 
-.guide-left .guide-note:first-child,
-.guide-right .guide-note{
-  margin-top:0 !important;
-  margin-left:0 !important;
-}
+  .guide-left .guide-note:first-child,
+  .guide-right .guide-note{
+    margin-top:0 !important;
+    margin-left:0 !important;
+  }
 
-.guide-left .guide-note::before,
-.guide-left .guide-note::after,
-.guide-right .guide-note::before,
-.guide-right .guide-note::after{
-  display:none !important;
-}
+  .guide-left .guide-note::before,
+  .guide-left .guide-note::after,
+  .guide-right .guide-note::before,
+  .guide-right .guide-note::after{
+    display:none !important;
+  }
 
-.guide-note{
-  padding:16px;
-  border-radius:18px;
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.08);
-}
+  .guide-note{
+    padding:16px;
+    border-radius:18px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+  }
 
-.guide-note h3{
-  font-size:18px;
-}
+  .guide-note h3{
+    font-size:18px;
+  }
 
-.guide-note p{
-  font-size:15px;
-  line-height:1.55;
-}
-     
-/* mobil: jednoduché pořadí sekcí */
-body{
-  display:flex;
-  flex-direction:column;
-}
+  .guide-note p{
+    font-size:15px;
+    line-height:1.55;
+  }
+      
+  /* mobil: jednoduché pořadí sekcí */
+  body{
+    display:flex;
+    flex-direction:column;
+  }
 
-.top-section{
-  order:1;
-  width:100%;
-}
+  .top-section{
+    order:1;
+    width:100%;
+  }
 
-.guide-section{
-  order:2;
-  width:100%;
-}
+  .guide-section{
+    order:2;
+    width:100%;
+  }
 
-.purple-section{
-  order:3;
-  width:100%;
-}
+  .purple-section{
+    order:3;
+    width:100%;
+  }
 
-.blue-section{
-  order:4;
-  width:100%;
-}
+  .blue-section{
+    order:4;
+    width:100%;
+  }
 
-/* mobil bez reveal animace */
-.info-section{
-  opacity:1 !important;
-  transform:none !important;
-}
+  /* mobil bez reveal animace */
+  .info-section{
+    opacity:1 !important;
+    transform:none !important;
+  }
 
   /* vypnout všechny glow / blur vrstvy */
   .info-section::before,
@@ -1117,7 +1117,7 @@ body{
   }
 
   .share-btn:hover{
-  transform:none;
+    transform:none;
   }
 
   #convert{
@@ -1245,100 +1245,124 @@ body{
     right:66px;
     width:44px;
     height:44px;
-    border-radius:14px;
     padding:0;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.055);
+    color:#e5e7eb;
     display:flex;
     align-items:center;
     justify-content:center;
-    border:1px solid rgba(255,255,255,.14);
-    background:rgba(255,255,255,.06);
-    color:#fff;
-    font-size:20px;
     z-index:10;
+    cursor:pointer;
+    transition:background .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+
+  .theme-toggle:hover{
+    transform:none;
+    background:rgba(255,255,255,.09);
+    border-color:rgba(255,255,255,.28);
+    box-shadow:0 12px 28px rgba(0,0,0,.18);
+  }
+
+  .theme-icon{
+    width:21px;
+    height:21px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2.2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+
+  .theme-icon-moon{
+    display:none;
   }
 
   body.light-mobile{
     --text:#0f172a;
     --muted:#64748b;
-    --glass:#ffffff;
-    --border:rgba(15,23,42,.12);
-    --accent:#2563eb;
-    --accent2:#7c3aed;
-
-    background:#f6f8fc;
+    --border:rgba(15,23,42,.14);
+    background:#eef2f7;
     color:var(--text);
   }
 
   body.light-mobile .app,
+  body.light-mobile .guide-card,
   body.light-mobile .guide-note{
     background:#ffffff;
-    color:var(--text);
-    border-color:var(--border);
+    border:1px solid rgba(15,23,42,.12);
+    box-shadow:none;
+    backdrop-filter:none;
   }
 
-  body.light-mobile .logo,
-  body.light-mobile .hero-content h1,
-  body.light-mobile .blue-section h2,
-  body.light-mobile .guide-note h3{
-    color:var(--text);
-  }
-
-  body.light-mobile .hero-content p,
-  body.light-mobile .hero-note,
-  body.light-mobile .guide-note p,
-  body.light-mobile .status,
-  body.light-mobile .app-contact,
-  body.light-mobile .app-contact a{
-    color:var(--muted);
-  }
-
-  body.light-mobile .drop{
-    color:var(--text);
+  body.light-mobile .drop,
+  body.light-mobile .guide-drop{
     border-color:rgba(15,23,42,.18);
-    background:#f8fafc;
+    color:#0f172a;
+    background:transparent;
   }
 
-  body.light-mobile .drop:hover,
-  body.light-mobile .drop.active{
-    border-color:var(--accent);
-    background:rgba(37,99,235,.06);
-  }
-
-  body.light-mobile .format-btn{
-    color:var(--text);
-    border-color:rgba(15,23,42,.16);
+  body.light-mobile .format-btn,
+  body.light-mobile .guide-format-btn{
+    border:1px solid rgba(15,23,42,.14);
+    color:#0f172a;
     background:#ffffff;
-  }
-
-  body.light-mobile .format-btn:hover{
-    background:#f1f5f9;
-    border-color:rgba(15,23,42,.26);
   }
 
   body.light-mobile .format-btn.active,
-  body.light-mobile #convert,
+  body.light-mobile .guide-format-btn.active,
+  body.light-mobile button,
   body.light-mobile .guide-main-btn{
-    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    background:linear-gradient(135deg,#38bdf8,#818cf8);
     color:#ffffff;
+    border:none;
+  }
+
+  body.light-mobile .status,
+  body.light-mobile .footer,
+  body.light-mobile .guide-note p,
+  body.light-mobile .hero-content p,
+  body.light-mobile .guide-head p,
+  body.light-mobile .intro p{
+    color:#64748b;
+  }
+
+  body.light-mobile .logo,
+  body.light-mobile .guide-logo,
+  body.light-mobile h1,
+  body.light-mobile h2,
+  body.light-mobile h3,
+  body.light-mobile .intro h2,
+  body.light-mobile .drop,
+  body.light-mobile .guide-drop{
+    color:#0f172a;
+  }
+
+  body.light-mobile .app::before,
+  body.light-mobile .info-section::before,
+  body.light-mobile .guide-section::before{
+    display:none !important;
   }
 
   body.light-mobile .share-btn,
   body.light-mobile .theme-toggle{
-    background:#ffffff;
-    color:var(--text);
-    border-color:rgba(15,23,42,.14);
+    background:#f8fafc;
+    color:#0f172a;
+    border-color:rgba(15,23,42,.16);
+    box-shadow:none;
   }
 
-  body.light-mobile .share-icon{
-    stroke:var(--text);
+  body.light-mobile .share-btn:hover,
+  body.light-mobile .theme-toggle:hover{
+    background:#f1f5f9;
+    border-color:rgba(15,23,42,.24);
+    transform:none;
   }
 
-  body.light-mobile .logo svg path,
-  body.light-mobile .guide-logo svg path{
-    stroke:var(--accent);
-  }
-  body.light-mobile .guide-note .step{
-    color:#ffffff;
+  body.light-mobile .share-icon,
+  body.light-mobile .theme-icon{
+    stroke:currentColor;
   }
 
 }
@@ -1383,8 +1407,22 @@ body{
         <button id="convert">Konvertovat a stáhnout</button>
       </div>
 
-      <button id="themeToggle" type="button" class="theme-toggle">
-      ☀︎
+      <button id="themeToggle" type="button" class="theme-toggle" aria-label="Přepnout vzhled" title="Přepnout vzhled">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2.5V5"></path>
+          <path d="M12 19V21.5"></path>
+          <path d="M4.6 4.6L6.4 6.4"></path>
+          <path d="M17.6 17.6L19.4 19.4"></path>
+          <path d="M2.5 12H5"></path>
+          <path d="M19 12H21.5"></path>
+          <path d="M4.6 19.4L6.4 17.6"></path>
+          <path d="M17.6 6.4L19.4 4.6"></path>
+        </svg>
+
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5A7 7 0 1 0 20.5 15.5Z"></path>
+        </svg>
       </button>
 
       <div class="share-row">
@@ -1537,22 +1575,31 @@ const status = document.getElementById("status");
 const app = document.getElementById("app");
 const formatButtons = document.querySelectorAll(".format-btn");
 const desktopGreeting = document.getElementById("desktopGreeting");
+const shareBtn = document.getElementById("shareBtn");
 const shareMenu = document.getElementById("shareMenu");
 const themeToggle = document.getElementById("themeToggle");
+const mobileMedia = window.matchMedia("(max-width: 768px)");
 
-if (themeToggle) {
+function applySavedTheme() {
   const savedTheme = localStorage.getItem("bkconvert-mobile-theme");
 
-  if (savedTheme === "light") {
+  if (mobileMedia.matches && savedTheme === "light") {
     document.body.classList.add("light-mobile");
-    themeToggle.textContent = "☾";
+  } else {
+    document.body.classList.remove("light-mobile");
   }
+}
 
+applySavedTheme();
+
+window.addEventListener("resize", applySavedTheme);
+
+if (themeToggle) {
   themeToggle.addEventListener("click", () => {
-    const isLight = document.body.classList.toggle("light-mobile");
+    if (!mobileMedia.matches) return;
 
+    const isLight = document.body.classList.toggle("light-mobile");
     localStorage.setItem("bkconvert-mobile-theme", isLight ? "light" : "dark");
-    themeToggle.textContent = isLight ? "☾" : "☀︎";
   });
 }
 
