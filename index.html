@@ -709,6 +709,14 @@ button:hover{
     overflow-x:hidden;
   }
 
+.guide-step1-desktop{
+  display:none;
+}
+
+.guide-step1-mobile{
+  display:inline;
+}
+     
 .drop-text-desktop{
   display:none;
 }
@@ -1004,6 +1012,10 @@ body{
     gap:8px;
   }
 
+.guide-step1-mobile{
+  display:none;
+}
+     
   .guide-format-btn{
     height:56px;
     border-radius:18px;
@@ -1072,7 +1084,7 @@ body{
       Stačí vložit soubory, vybrat cílový formát a stáhnout hotový ZIP soubor během vteřiny.
     </p>
     <p class="hero-note">
-      Jednoduché rozhraní. Lze více obrázků najednou.
+      Jednoduché rozhraní. Stahujte více obrázků najednou.
     </p>
   </div>
 </section>
@@ -1106,9 +1118,10 @@ body{
         <div class="guide-note">
           <div class="step">1</div>
           <h3>Vložte obrázky</h3>
-          <p>
-            Klikněte do pole nebo do něj přetáhněte soubory, které chcete převést.
-          </p>
+         <p>
+            <span class="guide-step1-desktop">Klikněte do pole nebo do něj přetáhněte soubory, které chcete převést.</span>
+            <span class="guide-step1-mobile">Klikněte do pole a vyberte soubory na převod.</span>
+         </p>
         </div>
 
         <div class="guide-note">
