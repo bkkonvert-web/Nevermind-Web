@@ -321,7 +321,11 @@ header{
   background:rgba(56,189,248,.08);
 }
 
+.drop-text-mobile{
+  display:none;
+}
 
+     
 /* ===== CONTROLS ===== */
 .controls{
   display:grid;
@@ -705,6 +709,14 @@ button:hover{
     overflow-x:hidden;
   }
 
+.drop-text-desktop{
+  display:none;
+}
+
+.drop-text-mobile{
+  display:inline;
+}
+     
 /* mobil: scroll 4 jen jako 3 jednoduché kroky */
 .guide-section{
   min-height:auto;
@@ -1027,10 +1039,10 @@ body{
           BK Convert
         </div>
       </header>
-
-      <div class="drop" id="imgDrop">
-        Klikněte nebo přetáhněte obrázky
-      </div>
+     <div class="drop" id="imgDrop">
+          <span class="drop-text-desktop">Klikněte nebo přetáhněte obrázky</span>
+          <span class="drop-text-mobile">Kliknutím vložte obrázky</span>
+     </div>
       <input type="file" id="imgInput" accept="image/*" multiple hidden>
 
       <div class="controls">
@@ -1119,9 +1131,10 @@ body{
           </div>
         </div>
 
-        <div class="guide-drop">
-          Klikněte nebo přetáhněte obrázky
-        </div>
+     <div class="guide-drop">
+       <span class="drop-text-desktop">Klikněte nebo přetáhněte obrázky</span>
+       <span class="drop-text-mobile">Kliknutím vložte obrázky</span>
+     </div>
 
         <div class="guide-controls">
           <div class="guide-format-buttons">
