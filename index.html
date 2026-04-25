@@ -1219,7 +1219,17 @@ function isMobileDevice() {
 /* RENDER THUMBS */
 function renderThumbs() {
   if (files.length > 0) {
-    status.textContent = `Připraveno k převodu: ${files.length} obrázků`;  } else {
+    const count = files.length;
+
+    let word = "souborů";
+    if (count === 1) {
+      word = "soubor";
+    } else if (count >= 2 && count <= 4) {
+      word = "soubory";
+    }
+
+    status.textContent = `Připraveno k převodu: ${count} ${word}`;
+  } else {
     status.textContent = "";
   }
 }
