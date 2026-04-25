@@ -705,20 +705,37 @@ button:hover{
     overflow-x:hidden;
   }
 
-  body{
-    background:linear-gradient(180deg, #040816 0%, #081327 100%);
-    background-attachment:scroll;
-  }
+/* mobil: jednoduché pořadí sekcí */
+body{
+  display:flex;
+  flex-direction:column;
+}
 
-  .top-section{
-    min-height:auto;
-    padding:16px 12px 10px;
-  }
+.top-section{
+  order:1;
+  width:100%;
+}
 
-  .info-section{
-    min-height:auto;
-    padding:24px 16px;
-  }
+.guide-section{
+  order:2;
+  width:100%;
+}
+
+.purple-section{
+  order:3;
+  width:100%;
+}
+
+.blue-section{
+  order:4;
+  width:100%;
+}
+
+/* mobil bez reveal animace */
+.info-section{
+  opacity:1 !important;
+  transform:none !important;
+}
 
   /* vypnout všechny glow / blur vrstvy */
   .info-section::before,
