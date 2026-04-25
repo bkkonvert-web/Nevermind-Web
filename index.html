@@ -448,6 +448,10 @@ button:hover{
   transform:translateY(-3px) scale(1.02);
 }
 
+.theme-toggle:hover{
+  transform:none;
+}
+
 /* ===== STATUS ===== */
 .status{
   margin-top:22px;
@@ -820,6 +824,10 @@ button:hover{
   background:rgba(255,255,255,.08);
 }
 
+.theme-toggle{
+  display:none;
+}
+
 /* ===== TABLET VERSION ===== */
 @media (max-width: 980px){
   .guide-grid{
@@ -1108,6 +1116,10 @@ body{
     min-width:0;
   }
 
+  .share-btn:hover{
+  transform:none;
+  }
+
   #convert{
     width:100%;
     height:60px;
@@ -1226,6 +1238,109 @@ body{
     border-radius:20px;
     font-size:17px;
   }
+
+  .theme-toggle{
+    position:absolute;
+    top:12px;
+    right:66px;
+    width:44px;
+    height:44px;
+    border-radius:14px;
+    padding:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(255,255,255,.14);
+    background:rgba(255,255,255,.06);
+    color:#fff;
+    font-size:20px;
+    z-index:10;
+  }
+
+  body.light-mobile{
+    --text:#0f172a;
+    --muted:#64748b;
+    --glass:#ffffff;
+    --border:rgba(15,23,42,.12);
+    --accent:#2563eb;
+    --accent2:#7c3aed;
+
+    background:#f6f8fc;
+    color:var(--text);
+  }
+
+  body.light-mobile .app,
+  body.light-mobile .guide-note{
+    background:#ffffff;
+    color:var(--text);
+    border-color:var(--border);
+  }
+
+  body.light-mobile .logo,
+  body.light-mobile .hero-content h1,
+  body.light-mobile .blue-section h2,
+  body.light-mobile .guide-note h3{
+    color:var(--text);
+  }
+
+  body.light-mobile .hero-content p,
+  body.light-mobile .hero-note,
+  body.light-mobile .guide-note p,
+  body.light-mobile .status,
+  body.light-mobile .app-contact,
+  body.light-mobile .app-contact a{
+    color:var(--muted);
+  }
+
+  body.light-mobile .drop{
+    color:var(--text);
+    border-color:rgba(15,23,42,.18);
+    background:#f8fafc;
+  }
+
+  body.light-mobile .drop:hover,
+  body.light-mobile .drop.active{
+    border-color:var(--accent);
+    background:rgba(37,99,235,.06);
+  }
+
+  body.light-mobile .format-btn{
+    color:var(--text);
+    border-color:rgba(15,23,42,.16);
+    background:#ffffff;
+  }
+
+  body.light-mobile .format-btn:hover{
+    background:#f1f5f9;
+    border-color:rgba(15,23,42,.26);
+  }
+
+  body.light-mobile .format-btn.active,
+  body.light-mobile #convert,
+  body.light-mobile .guide-main-btn{
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:#ffffff;
+  }
+
+  body.light-mobile .share-btn,
+  body.light-mobile .theme-toggle{
+    background:#ffffff;
+    color:var(--text);
+    border-color:rgba(15,23,42,.14);
+  }
+
+  body.light-mobile .share-icon{
+    stroke:var(--text);
+  }
+
+  body.light-mobile .logo svg path,
+  body.light-mobile .guide-logo svg path{
+    stroke:var(--accent);
+  }
+  body.light-mobile .guide-note .step{
+    color:#ffffff;
+  }
+
 }
 
 
@@ -1267,6 +1382,11 @@ body{
         </div>
         <button id="convert">Konvertovat a stáhnout</button>
       </div>
+
+      <button id="themeToggle" type="button" class="theme-toggle">
+      ☀︎
+      </button>
+
       <div class="share-row">
         <button id="shareBtn" type="button" class="share-btn" aria-label="Sdílet" title="Sdílet">
           <svg class="share-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -1393,7 +1513,7 @@ body{
   </div>
   <a href="#top" class="back-to-top" aria-label="Zpět na začátek">
     <span class="back-to-top-arrow">↑</span>
-    <span class="back-to-top-text">Pojďme na to!</span>
+    <span class="back-to-top-text">Zpět nahoru, pokud všemu rozumíte</span>
   </a>
 </section>
 
@@ -1418,6 +1538,24 @@ const app = document.getElementById("app");
 const formatButtons = document.querySelectorAll(".format-btn");
 const desktopGreeting = document.getElementById("desktopGreeting");
 const shareMenu = document.getElementById("shareMenu");
+const themeToggle = document.getElementById("themeToggle");
+
+if (themeToggle) {
+  const savedTheme = localStorage.getItem("bkconvert-mobile-theme");
+
+  if (savedTheme === "light") {
+    document.body.classList.add("light-mobile");
+    themeToggle.textContent = "☾";
+  }
+
+  themeToggle.addEventListener("click", () => {
+    const isLight = document.body.classList.toggle("light-mobile");
+
+    localStorage.setItem("bkconvert-mobile-theme", isLight ? "light" : "dark");
+    themeToggle.textContent = isLight ? "☾" : "☀︎";
+  });
+}
+
 
 if (shareBtn && shareMenu) {
   shareBtn.addEventListener("click", async () => {
