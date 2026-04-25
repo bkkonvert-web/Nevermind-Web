@@ -488,6 +488,14 @@ button:hover{
   color:var(--muted);
 }
 
+.guide-step1-mobile{
+  display:none;
+}
+
+.guide-step3-mobile{
+  display:none;
+}
+     
 /* arrows toward center */
 .guide-left .guide-note::after,
 .guide-right .guide-note::after{
@@ -714,6 +722,14 @@ button:hover{
 }
 
 .guide-step1-mobile{
+  display:inline;
+}
+
+.guide-step3-desktop{
+  display:none;
+}
+
+.guide-step3-mobile{
   display:inline;
 }
      
@@ -1010,12 +1026,7 @@ body{
   .guide-format-buttons{
     grid-template-columns:repeat(3, minmax(0, 1fr));
     gap:8px;
-  }
-
-  .guide-step1-mobile{
-     display:none;
-  }
-     
+  }     
   .guide-format-btn{
     height:56px;
     border-radius:18px;
@@ -1167,8 +1178,9 @@ body{
           <div class="step">3</div>
           <h3>Stáhněte výsledek</h3>
           <p>
-            Po dokončení se hotový výstup stáhne automaticky.
-          </p>
+               <span class="guide-step3-desktop">Po úspěšném převodu se soubor automaticky stáhne jako ZIP.</span>          
+               <span class="guide-step3-mobile">Po úspěšném převodu se soubor automaticky stáhne.</span>          
+          </p
         </div>
       </div>
     </div>
