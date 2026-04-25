@@ -743,9 +743,9 @@ button:hover{
 
 .share-row{
   position:absolute;
-  top:18px;
-  right:18px;
-  margin-top:0;
+  top:28px;
+  right:28px;
+  margin:0;
   display:flex;
   justify-content:flex-end;
   z-index:10;
@@ -783,6 +783,41 @@ button:hover{
   stroke-linejoin:round;
   opacity:.96;
   transform:translateX(-1px);
+}
+
+.share-menu{
+  position:absolute;
+  top:62px;
+  right:0;
+  width:190px;
+  padding:8px;
+  border-radius:18px;
+  background:rgba(15,23,42,.96);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 24px 70px rgba(0,0,0,.45);
+  display:none;
+}
+
+.share-menu.open{
+  display:grid;
+  gap:6px;
+}
+
+.share-menu button{
+  height:42px;
+  padding:0 12px;
+  border-radius:12px;
+  border:0;
+  background:transparent;
+  color:#ffffff;
+  font-size:14px;
+  font-weight:700;
+  text-align:left;
+  cursor:pointer;
+}
+
+.share-menu button:hover{
+  background:rgba(255,255,255,.08);
 }
 
 /* ===== TABLET VERSION ===== */
@@ -839,19 +874,26 @@ button:hover{
   }
 
   .share-row{
-    position:absolute;
-    top:14px;
-    right:18px;
-    margin:0;
+  position:absolute;
+  top:12px;
+  right:16px;
+  margin:0;
   }
 
   .share-btn{
-    width:52px;
-    height:32px;
-    border-radius:16px;
-    font-size:22px;
+    width:44px;
+    height:44px;
+    border-radius:14px;
   }
 
+  .share-icon{
+    width:21px;
+    height:21px;
+  }
+
+  .share-menu{
+    display:none !important;
+  }
 
   .guide-step1-desktop{
     display:none;
@@ -1232,6 +1274,14 @@ body{
             <path d="M21 3L14.5 21L9.5 14.5L3 11.5L21 3Z"></path>
           </svg>
         </button>
+
+        <div class="share-menu" id="shareMenu">
+          <button type="button" data-share="copy">Kopírovat odkaz</button>
+          <button type="button" data-share="whatsapp">WhatsApp</button>
+          <button type="button" data-share="facebook">Facebook</button>
+          <button type="button" data-share="x">X</button>
+          <button type="button" data-share="email">E-mail</button>
+        </div>
       </div>
       <div class="status" id="status"></div>
       <div class="app-contact">
@@ -1367,11 +1417,9 @@ const status = document.getElementById("status");
 const app = document.getElementById("app");
 const formatButtons = document.querySelectorAll(".format-btn");
 const desktopGreeting = document.getElementById("desktopGreeting");
-const shareBtn = document.getElementById("shareBtn");
+const shareMenu = document.getElementById("shareMenu");
 
-
-
-if (shareBtn) {
+if (shareBtn && shareMenu) {
   shareBtn.addEventListener("click", async () => {
     const shareData = {
       title: "BK Convert",
@@ -1379,19 +1427,63 @@ if (shareBtn) {
       url: window.location.href
     };
 
-    try {
-      if (navigator.share) {
+    const isMobileWidth = window.innerWidth <= 768;
+
+    // Mobile: use native share menu
+    if (isMobileWidth && navigator.share) {
+      try {
         await navigator.share(shareData);
-      } else if (navigator.clipboard) {
-        await navigator.clipboard.writeText(window.location.href);
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          status.textContent = "Sdílení se nepodařilo.";
+        }
+      }
+      return;
+    }
+
+    // Desktop: use custom menu
+    shareMenu.classList.toggle("open");
+  });
+
+  shareMenu.addEventListener("click", async (event) => {
+    const button = event.target.closest("button[data-share]");
+    if (!button) return;
+
+    const pageUrlRaw = window.location.href;
+    const pageUrl = encodeURIComponent(pageUrlRaw);
+    const pageText = encodeURIComponent("Vyzkoušej BK Convert pro rychlý převod obrázků.");
+
+    if (button.dataset.share === "copy") {
+      try {
+        await navigator.clipboard.writeText(pageUrlRaw);
         status.textContent = "Odkaz byl zkopírován do schránky.";
-      } else {
-        status.textContent = "Sdílení není v tomto prohlížeči podporováno.";
+      } catch {
+        status.textContent = "Odkaz se nepodařilo zkopírovat.";
       }
-    } catch (error) {
-      if (error.name !== "AbortError") {
-        status.textContent = "Sdílení se nepodařilo.";
-      }
+    }
+
+    if (button.dataset.share === "whatsapp") {
+      window.open(`https://wa.me/?text=${pageText}%20${pageUrl}`, "_blank");
+    }
+
+    if (button.dataset.share === "facebook") {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`, "_blank");
+    }
+
+    if (button.dataset.share === "x") {
+      window.open(`https://twitter.com/intent/tweet?text=${pageText}&url=${pageUrl}`, "_blank");
+    }
+
+    if (button.dataset.share === "email") {
+      window.location.href = `mailto:?subject=BK Convert&body=${pageText}%0A%0A${pageUrl}`;
+    }
+
+    shareMenu.classList.remove("open");
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!shareBtn.contains(event.target) && !shareMenu.contains(event.target)) {
+      shareMenu.classList.remove("open");
     }
   });
 }
