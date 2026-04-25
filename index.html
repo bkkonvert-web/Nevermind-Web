@@ -24,6 +24,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+
+/* ===== TOKENS / VARIABLES ===== */
 :root{
   --bg2:#020617;
   --bgPurple:#3a1f73;
@@ -38,7 +40,10 @@
   --accent:#38bdf8;
   --accent2:#818cf8;
 }
-/* RESET */
+
+
+/* ===== BASE / DESKTOP ===== */
+
 *{
   box-sizing:border-box;
 }
@@ -47,7 +52,6 @@ html{
   scroll-behavior:smooth;
 }
 
-/* ===== BACKGROUND ===== */
 body{
   margin:0;
   font-family:system-ui, sans-serif;
@@ -209,6 +213,43 @@ body{
   opacity:.9;
 }
 
+.back-to-top{
+  position:absolute;
+  right:24px;
+  bottom:-60px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:0 18px;
+  height:52px;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#020617;
+  text-decoration:none;
+  font-size:16px;
+  font-weight:900;
+  box-shadow:0 16px 40px rgba(56,189,248,.18);
+  transition:transform .2s ease, box-shadow .2s ease;
+  z-index:5;
+  white-space:nowrap;
+}
+
+.back-to-top:hover{
+  transform:translateY(-3px);
+}
+
+.back-to-top-arrow{
+  font-size:18px;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.back-to-top-text{
+  line-height:1;
+}
+
 /* ===== CONVERT SECTION ===== */
 
 .app{
@@ -226,6 +267,33 @@ body{
   transition:none;
   will-change:transform, opacity;
   pointer-events:none;
+}
+
+.desktop-greeting{
+  position:absolute;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:calc(100% - 72px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  min-height:0;
+  margin:0;
+  pointer-events:none;
+  z-index:4;
+}
+
+#desktopGreeting{
+  display:inline-block;
+  font-size:clamp(30px, 3.2vw, 42px);
+  font-weight:900;
+  line-height:1;
+  letter-spacing:-0.02em;
+  color:#eef2ff;
+  opacity:.96;
+  transition:opacity .3s ease, transform .3s ease;
 }
 
 .app::before{
@@ -673,7 +741,51 @@ button:hover{
   margin-top:220px;
 }
 
-/* mobile + smaller desktop */
+.share-row{
+  position:absolute;
+  top:18px;
+  right:18px;
+  margin-top:0;
+  display:flex;
+  justify-content:flex-end;
+  z-index:10;
+}
+
+.share-btn{
+  width:52px;
+  height:52px;
+  padding:0;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.055);
+  color:#ffffff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.share-btn:hover{
+  transform:translateY(-2px) scale(1.03);
+  background:rgba(255,255,255,.09);
+  border-color:rgba(255,255,255,.28);
+  box-shadow:0 14px 34px rgba(56,189,248,.16);
+}
+
+.share-icon{
+  width:25px;
+  height:25px;
+  fill:none;
+  stroke:#ffffff;
+  stroke-width:2.15;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  opacity:.96;
+  transform:translateX(-1px);
+}
+
+/* ===== TABLET VERSION ===== */
 @media (max-width: 980px){
   .guide-grid{
     grid-template-columns:1fr;
@@ -720,36 +832,59 @@ button:hover{
 
 
 
-/* ===== MOBILE ===== */
+/* ===== MOBILE VERSION ===== */
 @media (max-width: 768px){
   html, body{
     overflow-x:hidden;
   }
 
-.guide-step1-desktop{
-  display:none;
-}
+  .share-row{
+    position:absolute;
+    top:14px;
+    right:18px;
+    margin:0;
+  }
 
-.guide-step1-mobile{
-  display:inline;
-}
+  .share-btn{
+    width:52px;
+    height:32px;
+    border-radius:16px;
+    font-size:22px;
+  }
 
-.guide-step3-desktop{
-  display:none;
-}
-     
-.guide-step3-mobile{
-  display:inline;
-}
-     
-.drop-text-desktop{
-  display:none;
-}
 
-.drop-text-mobile{
-  display:inline;
-}
-     
+  .guide-step1-desktop{
+    display:none;
+  }
+
+  .desktop-greeting{
+    display:none !important;
+  }
+
+  .guide-step1-mobile{
+    display:inline;
+  }
+
+  .guide-step3-desktop{
+    display:none;
+  }
+      
+  .guide-step3-mobile{
+    display:inline;
+  }
+      
+  .drop-text-desktop{
+    display:none;
+  }
+
+  .drop-text-mobile{
+    display:inline;
+  }
+      
+  .back-to-top{
+    display:none;
+  }
+
 /* mobil: scroll 4 jen jako 3 jednoduché kroky */
 .guide-section{
   min-height:auto;
@@ -888,8 +1023,10 @@ body{
     display:flex;
     justify-content:flex-start;
     align-items:center;
-    gap:12px;
+    gap:16px;
     flex-wrap:wrap;
+    position:relative;
+    z-index:2;
   }
 
   .logo{
@@ -1059,9 +1196,12 @@ body{
 
 
 <!-- HERO -->
-<section class="top-section">
+<section class="top-section" id="top">
   <div class="convert-wrap static-convert">
     <div class="app app-visible" id="app">
+      <div class="desktop-greeting" aria-hidden="true">
+        <span id="desktopGreeting">Dobrý den</span>
+      </div>
       <header>
         <div class="logo">
           <svg viewBox="0 0 24 24" fill="none">
@@ -1085,7 +1225,14 @@ body{
         </div>
         <button id="convert">Konvertovat a stáhnout</button>
       </div>
-
+      <div class="share-row">
+        <button id="shareBtn" type="button" class="share-btn" aria-label="Sdílet" title="Sdílet">
+          <svg class="share-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 3L9.5 14.5"></path>
+            <path d="M21 3L14.5 21L9.5 14.5L3 11.5L21 3Z"></path>
+          </svg>
+        </button>
+      </div>
       <div class="status" id="status"></div>
       <div class="app-contact">
         <a href="mailto:bkkonverthelp@gmail.com">Kontakt: bkkonverthelp@gmail.com</a>
@@ -1101,10 +1248,10 @@ body{
       Převádějte obrázky mezi formáty JPG, PNG a WEBP rychle a jednoduše.
     </p>
     <p>
-      Stačí vložit soubory, vybrat cílový formát a stáhnout hotový ZIP soubor během vteřiny.
+      Stačí vložit soubory, vybrat cílový formát a stáhnout převedený soubor během vteřiny.
     </p>
     <p class="hero-note">
-      Jednoduché rozhraní. Stahujte více obrázků najednou.
+      Jednoduché na použití, převádejte více souborů najednou.
     </p>
   </div>
 </section>
@@ -1113,13 +1260,13 @@ body{
   <div class="hero-content">
     <h2>Bezpečnost na prvním místě</h2>
     <p>
-      BK Convert zpracovává obrázky přímo ve vašem prohlížeči anonymně. Soubory nejsou odesílány na externí server.
+      BK Convert zpracovává obrázky anonymně přímo ve vašem prohlížeči.
     </p>
     <p>
       Díky tomu máte větší kontrolu nad svými daty a můžete převádět obrázky rychle, bez registrace, bez čekání a zbytečného sdílení souborů třetím stranám.
     </p>
     <p class="hero-note">
-      Jednoduchý nástroj, rychlý výsledek a bezpečnější práce s obrázky každý den.
+      Jednoduchý nástroj, rychlý výsledek a bezpečnější práce se soubory každý den.
     </p>
   </div>
 </section>
@@ -1129,7 +1276,7 @@ body{
     <div class="guide-head">
       <h2>Jak použít BK Convert</h2>
       <p>
-        Krátký návod, jak převést obrázky během několika sekund.
+        Krátký návod, jak převést obrázky během několika sekund. V případě dotazů nás neváhejte kontaktovat.
       </p>
     </div>
 
@@ -1189,11 +1336,15 @@ body{
           <p>
                <span class="guide-step3-desktop">Po úspěšném převodu se soubor automaticky stáhne jako ZIP.</span>          
                <span class="guide-step3-mobile">Po úspěšném převodu se soubor automaticky stáhne.</span>          
-          </p
+          </p>
         </div>
       </div>
     </div>
   </div>
+  <a href="#top" class="back-to-top" aria-label="Zpět na začátek">
+    <span class="back-to-top-arrow">↑</span>
+    <span class="back-to-top-text">Zpět nahoru, pokud všemu rozumíte</span>
+  </a>
 </section>
 
 <script>
@@ -1215,6 +1366,89 @@ const convertBtn = document.getElementById("convert");
 const status = document.getElementById("status");
 const app = document.getElementById("app");
 const formatButtons = document.querySelectorAll(".format-btn");
+const desktopGreeting = document.getElementById("desktopGreeting");
+const shareBtn = document.getElementById("shareBtn");
+
+
+
+if (shareBtn) {
+  shareBtn.addEventListener("click", async () => {
+    const shareData = {
+      title: "BK Convert",
+      text: "Vyzkoušej BK Convert pro rychlý převod obrázků.",
+      url: window.location.href
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else if (navigator.clipboard) {
+        await navigator.clipboard.writeText(window.location.href);
+        status.textContent = "Odkaz byl zkopírován do schránky.";
+      } else {
+        status.textContent = "Sdílení není v tomto prohlížeči podporováno.";
+      }
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        status.textContent = "Sdílení se nepodařilo.";
+      }
+    }
+  });
+}
+
+
+if (desktopGreeting && window.innerWidth > 768) {
+  const greetings = [
+    "Dobrý den,",
+    "Dobrý deň,",
+    "Ahoj,",
+    "Ahojte,",
+    "Čau,",
+    "Čaute,",
+    "Nazdar,",
+    "Zdarec,",
+    "Servus,",
+    "Pozdrav pánbůh,",
+    "Vítejte.",
+    "Vitajte.",
+  ];
+
+  let index = 1;
+
+  function hideGreeting() {
+    desktopGreeting.style.opacity = "0";
+    desktopGreeting.style.transform = "translateY(-8px)";
+
+    setTimeout(() => {
+      const wrap = desktopGreeting.closest(".desktop-greeting");
+      if (wrap) {
+        wrap.style.display = "none";
+      }
+    }, 320);
+  }
+
+  function showNextGreeting() {
+    if (index >= greetings.length) {
+      hideGreeting();
+      return;
+    }
+
+    desktopGreeting.style.opacity = "0";
+    desktopGreeting.style.transform = "translateY(8px)";
+
+    setTimeout(() => {
+      desktopGreeting.textContent = greetings[index];
+      desktopGreeting.style.opacity = "1";
+      desktopGreeting.style.transform = "translateY(0)";
+      index++;
+
+      setTimeout(showNextGreeting, 900);
+    }, 220);
+  }
+
+  desktopGreeting.textContent = greetings[0];
+  setTimeout(showNextGreeting, 1200);
+}
 
 let files = [];
 let selectedFormatValue = "";
