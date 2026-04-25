@@ -705,6 +705,65 @@ button:hover{
     overflow-x:hidden;
   }
 
+/* mobil: scroll 4 jen jako 3 jednoduché kroky */
+.guide-section{
+  min-height:auto;
+  padding-top:20px;
+  padding-bottom:20px;
+}
+
+.guide-head,
+.guide-card{
+  display:none !important;
+}
+
+.guide-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+
+.guide-left{
+  order:1;
+  display:grid;
+  gap:12px;
+}
+
+.guide-right{
+  order:2;
+  display:grid;
+  gap:12px;
+}
+
+.guide-left .guide-note:first-child,
+.guide-right .guide-note{
+  margin-top:0 !important;
+  margin-left:0 !important;
+}
+
+.guide-left .guide-note::before,
+.guide-left .guide-note::after,
+.guide-right .guide-note::before,
+.guide-right .guide-note::after{
+  display:none !important;
+}
+
+.guide-note{
+  padding:16px;
+  border-radius:18px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.guide-note h3{
+  font-size:18px;
+}
+
+.guide-note p{
+  font-size:15px;
+  line-height:1.55;
+}
+     
 /* mobil: jednoduché pořadí sekcí */
 body{
   display:flex;
