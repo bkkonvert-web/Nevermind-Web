@@ -431,19 +431,6 @@ button{
   transition:.25s;
 }
 
-#convert{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-}
-
-.download-icon{
-  width:22px;
-  height:22px;
-  flex-shrink:0;
-}
-
 button:hover{
   transform:translateY(-3px) scale(1.02);
 }
@@ -1403,14 +1390,7 @@ button:hover{
           <button type="button" class="format-btn" data-value="image/png">PNG</button>
           <button type="button" class="format-btn" data-value="image/webp">WEBP</button>
         </div>
-        <button id="convert">
-          <span id="convertLabel">Konvertovat a stáhnout</span>
-          <svg class="download-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 3v12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M6.5 11.5L12 17l5.5-5.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M4 20h16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          </svg>
-        </button>
+        <button id="convert">Konvertovat a stáhnout</button>
       </div>
 
       <button id="themeToggle" type="button" class="theme-toggle" aria-label="Přepnout vzhled" title="Přepnout vzhled">
@@ -1579,7 +1559,6 @@ window.addEventListener("load", () => {
 const imgDrop = document.getElementById("imgDrop");
 const imgInput = document.getElementById("imgInput");
 const convertBtn = document.getElementById("convert");
-const convertLabel = document.getElementById("convertLabel");
 const status = document.getElementById("status");
 const app = document.getElementById("app");
 const formatButtons = document.querySelectorAll(".format-btn");
@@ -1851,7 +1830,7 @@ convertBtn.onclick = async () => {
 
   status.textContent = `Převod probíhá... 0 z ${files.length}`;
   convertBtn.disabled = true;
-  convertLabel.textContent = "Probíhá převod...";
+  convertBtn.textContent = "Probíhá převod...";
 
   try {
     const extension = selectedFormatValue.split("/")[1] === "jpeg"
@@ -1893,7 +1872,7 @@ convertBtn.onclick = async () => {
     status.textContent = "Při převodu došlo k chybě.";
   } finally {
     convertBtn.disabled = false;
-    convertLabel.textContent = "Konvertovat a stáhnout";
+    convertBtn.textContent = "Konvertovat a stáhnout";
   }
 };
 
