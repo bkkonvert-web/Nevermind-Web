@@ -5,16 +5,6 @@
 <link rel="icon" href="/favicon.png">
 <link rel="shortcut icon" href="/favicon.png">
 
-  <!-- Google tag (gtag.js) -->
-<script type="text/plain" data-consent="tracking" async src="https://www.googletagmanager.com/gtag/js?id=AW-18090878774"></script>
-<script type="text/plain" data-consent="tracking">
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-18090878774');
-</script>
-  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <meta charset="UTF-8">
   <title>BK Convert – Images</title>
@@ -1365,22 +1355,6 @@ button:hover{
 }
 
 
-/* ===== TEST AD SLOTS (temporary, remove losers after testing) ===== */
-.ad-desktop-only{ display:flex; justify-content:center; margin:20px auto; }
-.ad-mobile-only{ display:none; justify-content:center; margin:20px auto; }
-.ad-rail{ position:fixed; top:50%; transform:translateY(-50%); z-index:3; }
-.ad-rail-left{ left:8px; }
-.ad-rail-right{ right:8px; }
-
-@media (max-width: 1620px){
-  .ad-rail{ display:none; }
-}
-
-@media (max-width: 768px){
-  .ad-desktop-only{ display:none; }
-  .ad-mobile-only{ display:flex; }
-}
-
 </style>
 
 </head>
@@ -1467,47 +1441,6 @@ button:hover{
   </div>
 </section>
 
-<!-- Test slot: 728x90 leaderboard, desktop -->
-<div class="ad-desktop-only" data-ad="leaderboard-728x90">
-  <script type="text/plain" data-consent="ads">
-    atOptions = {
-      'key' : '717df96be351d22f6577d658571a328f',
-      'format' : 'iframe',
-      'height' : 90,
-      'width' : 728,
-      'params' : {}
-    };
-  </script>
-  <script type="text/plain" data-consent="ads" src="https://www.highperformanceformat.com/717df96be351d22f6577d658571a328f/invoke.js"></script>
-</div>
-
-<!-- Test slot: 160x600 skyscraper, fixed left rail, desktop -->
-<div class="ad-rail ad-rail-left" data-ad="skyscraper-160x600">
-  <script type="text/plain" data-consent="ads">
-    atOptions = {
-      'key' : '2405b6185c4f89b3c45b781bb1cde8dd',
-      'format' : 'iframe',
-      'height' : 600,
-      'width' : 160,
-      'params' : {}
-    };
-  </script>
-  <script type="text/plain" data-consent="ads" src="https://www.highperformanceformat.com/2405b6185c4f89b3c45b781bb1cde8dd/invoke.js"></script>
-</div>
-
-<!-- Test slot: 160x300, fixed right rail, desktop -->
-<div class="ad-rail ad-rail-right" data-ad="rect-160x300">
-  <script type="text/plain" data-consent="ads">
-    atOptions = {
-      'key' : '69041587fc5f662c777adc30875aeed8',
-      'format' : 'iframe',
-      'height' : 300,
-      'width' : 160,
-      'params' : {}
-    };
-  </script>
-  <script type="text/plain" data-consent="ads" src="https://www.highperformanceformat.com/69041587fc5f662c777adc30875aeed8/invoke.js"></script>
-</div>
 
 <section class="info-section purple-section">
   <div class="hero-content">
@@ -1616,20 +1549,6 @@ button:hover{
 </section>
 
 <!-- Test slot: 300x250 medium rectangle, footer (shown on all sizes) -->
-<div style="display:flex; justify-content:center; margin:20px auto;" data-ad="rectangle-300x250">
-  <script type="text/plain" data-consent="ads">
-    atOptions = {
-      'key' : '2554ad3f45f6bab6681c35fdc0272543',
-      'format' : 'iframe',
-      'height' : 250,
-      'width' : 300,
-      'params' : {}
-    };
-  </script>
-  <script type="text/plain" data-consent="ads" src="https://www.highperformanceformat.com/2554ad3f45f6bab6681c35fdc0272543/invoke.js"></script>
-</div>
-
-
 <script>
 /* BOOT */
 window.addEventListener("load", () => {
@@ -1990,122 +1909,6 @@ infoSections.forEach(section => {
   infoObserver.observe(section);
 });
 
-</script>
-
-<div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Souhlas s cookies">
-  <p>
-    Používáme cookies pro reklamy a měření návštěvnosti. Kliknutím na „Přijmout“ souhlasíte s jejich použitím.
-    Více v <a href="/cookies.html">zásadách cookies</a> a <a href="/privacy.html">ochraně soukromí</a>.
-  </p>
-  <div class="cookie-banner-actions">
-    <button type="button" id="cookieReject">Odmítnout</button>
-    <button type="button" id="cookieAccept">Přijmout</button>
-  </div>
-</div>
-
-<style>
-.cookie-banner{
-  position:fixed;
-  left:16px;
-  right:16px;
-  bottom:16px;
-  max-width:640px;
-  margin:0 auto;
-  background:#0f172a;
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:16px;
-  padding:18px 20px;
-  color:#e5e7eb;
-  font-size:14px;
-  line-height:1.6;
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
-  z-index:200;
-}
-.cookie-banner a{ color:#38bdf8; }
-.cookie-banner-actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:10px;
-  margin-top:14px;
-}
-.cookie-banner-actions button{
-  border:none;
-  border-radius:999px;
-  padding:9px 20px;
-  font-weight:700;
-  cursor:pointer;
-  font-size:14px;
-}
-#cookieReject{
-  background:transparent;
-  color:#9aa4c0;
-  border:1px solid rgba(255,255,255,.2);
-}
-#cookieAccept{
-  background:linear-gradient(135deg,#38bdf8,#818cf8);
-  color:#020617;
-}
-</style>
-
-<script>
-(function(){
-  var STORAGE_KEY = "bk_cookie_consent";
-  var banner = document.getElementById("cookieBanner");
-
-  function activateGated(category){
-    var nodes = document.querySelectorAll('script[type="text/plain"][data-consent="' + category + '"]');
-    var queue = Array.prototype.slice.call(nodes);
-
-    function runNext(){
-      if (!queue.length) return;
-      var old = queue.shift();
-      var el = document.createElement("script");
-      for (var i = 0; i < old.attributes.length; i++){
-        var attr = old.attributes[i];
-        if (attr.name === "type") continue;
-        el.setAttribute(attr.name, attr.value);
-      }
-      if (old.src){
-        el.addEventListener("load", runNext);
-        el.addEventListener("error", runNext);
-        old.parentNode.replaceChild(el, old);
-      } else {
-        el.textContent = old.textContent;
-        old.parentNode.replaceChild(el, old);
-        runNext();
-      }
-    }
-    runNext();
-  }
-
-  function hideBanner(){
-    if (banner) banner.style.display = "none";
-  }
-
-  var stored = localStorage.getItem(STORAGE_KEY);
-  if (stored === "accepted"){
-    activateGated("ads");
-    activateGated("tracking");
-    hideBanner();
-  } else if (stored === "rejected"){
-    hideBanner();
-  }
-
-  var acceptBtn = document.getElementById("cookieAccept");
-  var rejectBtn = document.getElementById("cookieReject");
-
-  if (acceptBtn) acceptBtn.addEventListener("click", function(){
-    localStorage.setItem(STORAGE_KEY, "accepted");
-    activateGated("ads");
-    activateGated("tracking");
-    hideBanner();
-  });
-
-  if (rejectBtn) rejectBtn.addEventListener("click", function(){
-    localStorage.setItem(STORAGE_KEY, "rejected");
-    hideBanner();
-  });
-})();
 </script>
 
 </body>
