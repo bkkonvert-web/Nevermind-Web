@@ -447,45 +447,80 @@ button:hover{
   color:var(--muted);
 }
 
-.share-banner{
+.share-popup{
   display:none;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-top:14px;
-  padding:14px 18px;
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:300;
+  max-width:360px;
+  padding:16px 40px 16px 18px;
   border-radius:18px;
-  background:linear-gradient(135deg, rgba(56,189,248,.14), rgba(129,140,248,.14));
+  background:#0f172a;
   border:1px solid rgba(255,255,255,.14);
-  text-decoration:none;
-  color:var(--text);
-  font-size:14px;
-  line-height:1.5;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
   opacity:0;
-  transform:translateY(8px);
-  transition:opacity .35s ease, transform .35s ease, background .2s ease, border-color .2s ease;
+  transform:translateY(16px);
+  transition:opacity .35s ease, transform .35s ease;
 }
 
-.share-banner.visible{
-  display:flex;
+.share-popup.visible{
+  display:block;
   opacity:1;
   transform:translateY(0);
 }
 
-.share-banner:hover{
-  background:linear-gradient(135deg, rgba(56,189,248,.22), rgba(129,140,248,.22));
-  border-color:rgba(255,255,255,.24);
+.share-popup-close{
+  position:absolute;
+  top:8px;
+  right:10px;
+  width:26px;
+  height:26px;
+  border:none;
+  background:transparent;
+  color:var(--muted);
+  font-size:20px;
+  line-height:1;
+  cursor:pointer;
+  padding:0;
 }
 
-.share-banner strong{
+.share-popup-close:hover{
+  color:var(--text);
+}
+
+.share-popup-link{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  color:var(--text);
+  font-size:14px;
+  line-height:1.5;
+}
+
+.share-popup-link:hover .share-popup-text strong{
+  text-decoration:underline;
+}
+
+.share-popup-text strong{
   color:var(--accent);
 }
 
-.share-banner-arrow{
+.share-popup-arrow{
   flex-shrink:0;
   font-size:18px;
   font-weight:900;
   color:var(--accent);
+}
+
+@media (max-width: 768px){
+  .share-popup{
+    right:12px;
+    left:12px;
+    bottom:12px;
+    max-width:none;
+  }
 }
 
 /* ===== FOOTER ===== */
@@ -1469,10 +1504,6 @@ button:hover{
         </div>
       </div>
       <div class="status" id="status"></div>
-      <a href="https://bitcrunching.com" target="_blank" rel="noopener" class="share-banner" id="shareBanner">
-        <span class="share-banner-text">Líbí se ti BK Convert? Podívej se na další nástroje na <strong>BitCrunching.com</strong></span>
-        <span class="share-banner-arrow">→</span>
-      </a>
       <div class="app-contact">
         <a href="mailto:kontakt@bkconvert.cz">Kontakt: kontakt@bkconvert.cz</a>
       </div>
@@ -1498,7 +1529,7 @@ const imgDrop = document.getElementById("imgDrop");
 const imgInput = document.getElementById("imgInput");
 const convertBtn = document.getElementById("convert");
 const status = document.getElementById("status");
-const shareBanner = document.getElementById("shareBanner");
+const sharePopup = document.getElementById("sharePopup");
 const app = document.getElementById("app");
 const formatButtons = document.querySelectorAll(".format-btn");
 const desktopGreeting = document.getElementById("desktopGreeting");
@@ -1758,7 +1789,7 @@ convertBtn.onclick = async () => {
   }
 
   status.textContent = `Převod probíhá... 0 z ${files.length}`;
-  if (shareBanner) shareBanner.classList.remove("visible");
+  if (sharePopup) sharePopup.classList.remove("visible");
   convertBtn.disabled = true;
   convertBtn.textContent = "Probíhá převod...";
 
@@ -1776,7 +1807,7 @@ convertBtn.onclick = async () => {
 
       downloadBlob(convertedBlob, outputName);
       status.textContent = "Hotovo. Obrázek byl stažen.";
-      if (shareBanner) shareBanner.classList.add("visible");
+      if (sharePopup) sharePopup.classList.add("visible");
       return;
     }
 
@@ -1798,7 +1829,7 @@ convertBtn.onclick = async () => {
     downloadBlob(zipBlob, "bkconvert-images.zip");
 
     status.textContent = `Hotovo. ZIP obsahuje ${files.length} obrázků.`;
-    if (shareBanner) shareBanner.classList.add("visible");
+    if (sharePopup) sharePopup.classList.add("visible");
   } catch (error) {
     console.error(error);
     status.textContent = "Při převodu došlo k chybě.";
@@ -1835,6 +1866,24 @@ infoSections.forEach(section => {
   infoObserver.observe(section);
 });
 
+</script>
+
+<div class="share-popup" id="sharePopup" role="dialog" aria-label="Odkaz na BitCrunching">
+  <button type="button" class="share-popup-close" id="sharePopupClose" aria-label="Zavřít">×</button>
+  <a href="https://bitcrunching.com" target="_blank" rel="noopener" class="share-popup-link">
+    <span class="share-popup-text">Líbí se ti BK Convert? Podívej se na další nástroje na <strong>BitCrunching.com</strong></span>
+    <span class="share-popup-arrow">→</span>
+  </a>
+</div>
+
+<script>
+(function(){
+  var popup = document.getElementById("sharePopup");
+  var closeBtn = document.getElementById("sharePopupClose");
+  if (closeBtn) closeBtn.addEventListener("click", function(){
+    if (popup) popup.classList.remove("visible");
+  });
+})();
 </script>
 
 </body>
