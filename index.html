@@ -447,42 +447,38 @@ button:hover{
   color:var(--muted);
 }
 
-.share-popup-backdrop{
+.share-popup{
   display:none;
   position:fixed;
-  inset:0;
-  z-index:299;
-  background:rgba(2,6,23,.72);
-  backdrop-filter:blur(4px);
-  opacity:0;
-  transition:opacity .3s ease;
-}
-
-.share-popup-backdrop.visible{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:1;
-}
-
-.share-popup{
-  position:relative;
+  right:20px;
+  bottom:20px;
   z-index:300;
-  width:400px;
-  max-width:92vw;
-  padding:28px 40px 24px 24px;
-  border-radius:22px;
+  width:340px;
+  max-width:calc(100vw - 40px);
+  padding:20px 40px 18px 20px;
+  border-radius:20px;
   background:#0f172a;
   border:1px solid rgba(255,255,255,.14);
-  box-shadow:0 30px 80px rgba(0,0,0,.6);
-  transform:translateY(16px) scale(.98);
+  box-shadow:0 24px 70px rgba(0,0,0,.5);
   opacity:0;
+  transform:translateY(16px);
   transition:opacity .3s ease, transform .3s ease;
 }
 
-.share-popup-backdrop.visible .share-popup{
-  transform:translateY(0) scale(1);
+.share-popup.visible{
+  display:block;
   opacity:1;
+  transform:translateY(0);
+}
+
+@media (max-width: 768px){
+  .share-popup{
+    right:12px;
+    left:12px;
+    bottom:12px;
+    width:auto;
+    max-width:none;
+  }
 }
 
 .share-popup-close{
@@ -1889,18 +1885,16 @@ infoSections.forEach(section => {
 
 </script>
 
-<div class="share-popup-backdrop" id="sharePopup">
-  <div class="share-popup" role="dialog" aria-modal="true" aria-label="Sdílet BK Convert">
-    <button type="button" class="share-popup-close" id="sharePopupClose" aria-label="Zavřít">×</button>
-    <p class="share-popup-title">Líbí se ti BK Convert?</p>
-    <p class="share-popup-subtitle">Sdílej ho s ostatními:</p>
-    <div class="share-popup-buttons">
-      <button type="button" data-share="copy">Kopírovat odkaz</button>
-      <button type="button" data-share="whatsapp">WhatsApp</button>
-      <button type="button" data-share="facebook">Facebook</button>
-      <button type="button" data-share="x">X</button>
-      <button type="button" data-share="email">E-mail</button>
-    </div>
+<div class="share-popup" id="sharePopup" role="dialog" aria-label="Sdílet BK Convert">
+  <button type="button" class="share-popup-close" id="sharePopupClose" aria-label="Zavřít">×</button>
+  <p class="share-popup-title">Líbí se ti BK Convert?</p>
+  <p class="share-popup-subtitle">Sdílej ho s ostatními:</p>
+  <div class="share-popup-buttons">
+    <button type="button" data-share="copy">Kopírovat odkaz</button>
+    <button type="button" data-share="whatsapp">WhatsApp</button>
+    <button type="button" data-share="facebook">Facebook</button>
+    <button type="button" data-share="x">X</button>
+    <button type="button" data-share="email">E-mail</button>
   </div>
 </div>
 
