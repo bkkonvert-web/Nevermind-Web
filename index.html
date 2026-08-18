@@ -504,29 +504,41 @@ button:hover{
   color:var(--text);
 }
 
-.share-popup-link{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  text-decoration:none;
-  color:var(--text);
-  font-size:16px;
-  line-height:1.55;
-}
-
-.share-popup-link:hover .share-popup-text strong{
-  text-decoration:underline;
-}
-
-.share-popup-text strong{
-  color:var(--accent);
-}
-
-.share-popup-arrow{
-  flex-shrink:0;
-  font-size:22px;
+.share-popup-title{
+  margin:0 0 4px;
+  font-size:19px;
   font-weight:900;
-  color:var(--accent);
+  color:var(--text);
+}
+
+.share-popup-subtitle{
+  margin:0 0 16px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+.share-popup-buttons{
+  display:grid;
+  gap:8px;
+}
+
+.share-popup-buttons button{
+  height:44px;
+  padding:0 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.04);
+  color:var(--text);
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  text-align:left;
+  transition:.2s;
+}
+
+.share-popup-buttons button:hover{
+  background:rgba(255,255,255,.09);
+  border-color:rgba(255,255,255,.24);
 }
 
 /* ===== FOOTER ===== */
@@ -1568,6 +1580,37 @@ if (themeToggle) {
 }
 
 
+async function performShareAction(action) {
+  const pageUrlRaw = window.location.href;
+  const pageUrl = encodeURIComponent(pageUrlRaw);
+  const pageText = encodeURIComponent("Vyzkoušej BK Convert pro rychlý převod obrázků.");
+
+  if (action === "copy") {
+    try {
+      await navigator.clipboard.writeText(pageUrlRaw);
+      status.textContent = "Odkaz byl zkopírován do schránky.";
+    } catch {
+      status.textContent = "Odkaz se nepodařilo zkopírovat.";
+    }
+  }
+
+  if (action === "whatsapp") {
+    window.open(`https://wa.me/?text=${pageText}%20${pageUrl}`, "_blank");
+  }
+
+  if (action === "facebook") {
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`, "_blank");
+  }
+
+  if (action === "x") {
+    window.open(`https://twitter.com/intent/tweet?text=${pageText}&url=${pageUrl}`, "_blank");
+  }
+
+  if (action === "email") {
+    window.location.href = `mailto:?subject=BK Convert&body=${pageText}%0A%0A${pageUrl}`;
+  }
+}
+
 if (shareBtn && shareMenu) {
   shareBtn.addEventListener("click", async () => {
     const shareData = {
@@ -1598,35 +1641,7 @@ if (shareBtn && shareMenu) {
     const button = event.target.closest("button[data-share]");
     if (!button) return;
 
-    const pageUrlRaw = window.location.href;
-    const pageUrl = encodeURIComponent(pageUrlRaw);
-    const pageText = encodeURIComponent("Vyzkoušej BK Convert pro rychlý převod obrázků.");
-
-    if (button.dataset.share === "copy") {
-      try {
-        await navigator.clipboard.writeText(pageUrlRaw);
-        status.textContent = "Odkaz byl zkopírován do schránky.";
-      } catch {
-        status.textContent = "Odkaz se nepodařilo zkopírovat.";
-      }
-    }
-
-    if (button.dataset.share === "whatsapp") {
-      window.open(`https://wa.me/?text=${pageText}%20${pageUrl}`, "_blank");
-    }
-
-    if (button.dataset.share === "facebook") {
-      window.open(`https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`, "_blank");
-    }
-
-    if (button.dataset.share === "x") {
-      window.open(`https://twitter.com/intent/tweet?text=${pageText}&url=${pageUrl}`, "_blank");
-    }
-
-    if (button.dataset.share === "email") {
-      window.location.href = `mailto:?subject=BK Convert&body=${pageText}%0A%0A${pageUrl}`;
-    }
-
+    await performShareAction(button.dataset.share);
     shareMenu.classList.remove("open");
   });
 
@@ -1875,12 +1890,17 @@ infoSections.forEach(section => {
 </script>
 
 <div class="share-popup-backdrop" id="sharePopup">
-  <div class="share-popup" role="dialog" aria-modal="true" aria-label="Odkaz na BitCrunching">
+  <div class="share-popup" role="dialog" aria-modal="true" aria-label="Sdílet BK Convert">
     <button type="button" class="share-popup-close" id="sharePopupClose" aria-label="Zavřít">×</button>
-    <a href="https://bitcrunching.com" target="_blank" rel="noopener" class="share-popup-link">
-      <span class="share-popup-text">Líbí se ti BK Convert? Podívej se na další nástroje na <strong>BitCrunching.com</strong></span>
-      <span class="share-popup-arrow">→</span>
-    </a>
+    <p class="share-popup-title">Líbí se ti BK Convert?</p>
+    <p class="share-popup-subtitle">Sdílej ho s ostatními:</p>
+    <div class="share-popup-buttons">
+      <button type="button" data-share="copy">Kopírovat odkaz</button>
+      <button type="button" data-share="whatsapp">WhatsApp</button>
+      <button type="button" data-share="facebook">Facebook</button>
+      <button type="button" data-share="x">X</button>
+      <button type="button" data-share="email">E-mail</button>
+    </div>
   </div>
 </div>
 
@@ -1890,6 +1910,12 @@ infoSections.forEach(section => {
   var closeBtn = document.getElementById("sharePopupClose");
   if (closeBtn) closeBtn.addEventListener("click", function(){
     if (popup) popup.classList.remove("visible");
+  });
+
+  popup.addEventListener("click", async function(event){
+    var button = event.target.closest("button[data-share]");
+    if (!button) return;
+    await performShareAction(button.dataset.share);
   });
 })();
 </script>
