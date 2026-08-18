@@ -447,6 +447,47 @@ button:hover{
   color:var(--muted);
 }
 
+.share-banner{
+  display:none;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:14px;
+  padding:14px 18px;
+  border-radius:18px;
+  background:linear-gradient(135deg, rgba(56,189,248,.14), rgba(129,140,248,.14));
+  border:1px solid rgba(255,255,255,.14);
+  text-decoration:none;
+  color:var(--text);
+  font-size:14px;
+  line-height:1.5;
+  opacity:0;
+  transform:translateY(8px);
+  transition:opacity .35s ease, transform .35s ease, background .2s ease, border-color .2s ease;
+}
+
+.share-banner.visible{
+  display:flex;
+  opacity:1;
+  transform:translateY(0);
+}
+
+.share-banner:hover{
+  background:linear-gradient(135deg, rgba(56,189,248,.22), rgba(129,140,248,.22));
+  border-color:rgba(255,255,255,.24);
+}
+
+.share-banner strong{
+  color:var(--accent);
+}
+
+.share-banner-arrow{
+  flex-shrink:0;
+  font-size:18px;
+  font-weight:900;
+  color:var(--accent);
+}
+
 /* ===== FOOTER ===== */
 .footer{
   position:absolute;
@@ -1428,6 +1469,10 @@ button:hover{
         </div>
       </div>
       <div class="status" id="status"></div>
+      <a href="https://bitcrunching.com" target="_blank" rel="noopener" class="share-banner" id="shareBanner">
+        <span class="share-banner-text">Líbí se ti BK Convert? Podívej se na další nástroje na <strong>BitCrunching.com</strong></span>
+        <span class="share-banner-arrow">→</span>
+      </a>
       <div class="app-contact">
         <a href="mailto:kontakt@bkconvert.cz">Kontakt: kontakt@bkconvert.cz</a>
       </div>
@@ -1453,6 +1498,7 @@ const imgDrop = document.getElementById("imgDrop");
 const imgInput = document.getElementById("imgInput");
 const convertBtn = document.getElementById("convert");
 const status = document.getElementById("status");
+const shareBanner = document.getElementById("shareBanner");
 const app = document.getElementById("app");
 const formatButtons = document.querySelectorAll(".format-btn");
 const desktopGreeting = document.getElementById("desktopGreeting");
@@ -1712,6 +1758,7 @@ convertBtn.onclick = async () => {
   }
 
   status.textContent = `Převod probíhá... 0 z ${files.length}`;
+  if (shareBanner) shareBanner.classList.remove("visible");
   convertBtn.disabled = true;
   convertBtn.textContent = "Probíhá převod...";
 
@@ -1729,6 +1776,7 @@ convertBtn.onclick = async () => {
 
       downloadBlob(convertedBlob, outputName);
       status.textContent = "Hotovo. Obrázek byl stažen.";
+      if (shareBanner) shareBanner.classList.add("visible");
       return;
     }
 
@@ -1750,6 +1798,7 @@ convertBtn.onclick = async () => {
     downloadBlob(zipBlob, "bkconvert-images.zip");
 
     status.textContent = `Hotovo. ZIP obsahuje ${files.length} obrázků.`;
+    if (shareBanner) shareBanner.classList.add("visible");
   } catch (error) {
     console.error(error);
     status.textContent = "Při převodu došlo k chybě.";
